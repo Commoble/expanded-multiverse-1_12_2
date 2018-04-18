@@ -1,0 +1,16 @@
+[
+{
+  "modid": "expanded-multiverse",
+  "name": "Expanded Multiverse",
+  "description": "Expands your multiverse.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "I hear the Forge and FML guys are the cat's bananas",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

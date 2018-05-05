@@ -18,16 +18,19 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ItemLedger
 {
 	// creative tab for the stuff
-	public static final CreativeTabs trtab = new CreativeTabs("dungeonfist") {
+	public static final CreativeTabs emtab = new CreativeTabs("expandedmultiverse") {
 		@Override
 		public ItemStack getTabIconItem()
 		{
-			return new ItemStack(Items.GOLD_INGOT);
+			return new ItemStack(Items.ENDER_EYE);
 		}
 	};
 	
+	public static ItemBlock wormholeCoreItemBlock;
+	
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
+		wormholeCoreItemBlock = registerItemBlock(event.getRegistry(), new ItemBlock(BlockLedger.blockWormholeCore), "wormholecore");
 		//grinderItemBlock = registerItemBlock(event.getRegistry(), new ItemBlock(BlockLedger.grinderBlock), "grinder");
 		//grinderItemBlock.setCreativeTab(trtab);
 	}

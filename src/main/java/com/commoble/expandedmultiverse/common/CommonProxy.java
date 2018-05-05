@@ -1,7 +1,12 @@
 package com.commoble.expandedmultiverse.common;
 
+import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
+import com.commoble.expandedmultiverse.common.tileentity.TileEntityLedger;
 import com.commoble.expandedmultiverse.common.world.WorldGenManager;
+import com.commoble.expandedmultiverse.common.world.WorldProviderGeneric;
 
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,14 +17,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy
 {
 	// config values
+
+	//
+
 	
-	// blocks
-	
-	// items
-	
-	// sounds
-	
-	// misc
 	public static WorldGenManager worldGenManager = new WorldGenManager();
 	
 	public static int modEntityID = 0;
@@ -42,9 +43,9 @@ public class CommonProxy
 		// Registration
 		// Blocks, Enchantments, Items, Potions, SoundEvents, and Biomes should be registered with registry events
 		// Entities, Tile Entities, and Dimensions need to be registered here
-		//this.registerTileEntities();
+		TileEntityLedger.registerTileEntities();
 		//this.registerEntities();
-		//this.registerPlanes();
+		this.registerPlanes();
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
 	}
 	
@@ -64,5 +65,12 @@ public class CommonProxy
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		
+	}
+	
+	private void registerPlanes()
+	{
+		DimensionLedger.test_dim_id = DimensionManager.getNextFreeDimId();
+		DimensionLedger.test_dim_type = DimensionType.register("generic_universe", "_generic_universe", DimensionLedger.test_dim_id, WorldProviderGeneric.class, false);
+		DimensionManager.registerDimension(DimensionLedger.test_dim_id,  DimensionLedger.test_dim_type);
 	}
 }

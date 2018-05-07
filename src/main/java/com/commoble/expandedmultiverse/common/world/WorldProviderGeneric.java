@@ -44,7 +44,7 @@ public class WorldProviderGeneric extends WorldProvider
 	public DimensionType getDimensionType()
 	{
 		// TODO Auto-generated method stub
-		return DimensionLedger.test_dim_type;
+		return DimensionLedger.getPerpTypeFromID(this.getDimension());
 	}
 
     public IChunkGenerator createChunkGenerator()

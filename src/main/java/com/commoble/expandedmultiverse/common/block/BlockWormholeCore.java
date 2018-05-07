@@ -2,6 +2,7 @@ package com.commoble.expandedmultiverse.common.block;
 
 import javax.annotation.Nullable;
 
+import com.commoble.expandedmultiverse.common.ConfigMultiverse;
 import com.commoble.expandedmultiverse.common.item.ItemLedger;
 import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
 import com.commoble.expandedmultiverse.common.multiverse.PerpendicularTeleporter;
@@ -64,7 +65,7 @@ public class BlockWormholeCore extends BlockContainer
     		}
     		else
     		{
-                playerIn.changeDimension(this.getDestinationDimensionID(world), this.getTeleporter());
+                playerIn.changeDimension(this.getDestinationDimensionID(world, pos), this.getTeleporter(pos));
                 return true;
     		}
     	}
@@ -72,12 +73,13 @@ public class BlockWormholeCore extends BlockContainer
 
     // get the ID of the destination world
     // based on the world the traveller is standing in *before* travel
-    public int getDestinationDimensionID(World world)
+    public int getDestinationDimensionID(World world, BlockPos pos)
     {
     	// if this is the main world, go to another world
     	if (world.provider.getDimension() == 0)
     	{
-    		return DimensionLedger.test_dim_id;
+    		int index = pos.hashCode() % ConfigMultiverse.perpendicularUniverseCount;
+    		return DimensionLedger.getPerpendicularUniverseID(index);
     	}
     	else	// if this is ANY OTHER WORLD, go back to the main world
     	{
@@ -85,9 +87,9 @@ public class BlockWormholeCore extends BlockContainer
     	}
     }
     
-    public ITeleporter getTeleporter()
+    public ITeleporter getTeleporter(BlockPos pos)
     {
-    	return new PerpendicularTeleporter();
+    	return new PerpendicularTeleporter(pos);
     }
     
     @Override

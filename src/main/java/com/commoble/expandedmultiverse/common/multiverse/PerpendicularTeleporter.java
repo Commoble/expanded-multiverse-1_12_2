@@ -25,9 +25,11 @@ import net.minecraftforge.common.util.ITeleporter;
  */
 public class PerpendicularTeleporter implements ITeleporter
 {
+	private final BlockPos basePos;	// the blockpos of the block that initiated the teleport
 	
-    public PerpendicularTeleporter()
+    public PerpendicularTeleporter(BlockPos pos)
     {
+    	this.basePos = pos;
     }
 
     /**
@@ -48,18 +50,18 @@ public class PerpendicularTeleporter implements ITeleporter
     @Override
     public void placeEntity(World nextWorld, Entity entity, float yaw)
     {
-        placeInPortal(nextWorld, entity, yaw);
+    	if (!entity.world.isRemote)
+    	{	// don't run on the client
+            placeInPortal(nextWorld, entity, yaw);
+    	}
     }
 
     public void placeInPortal(World nextWorld, Entity entityIn, float rotationYaw)
     {
-        if (nextWorld.provider.getDimensionType().getId() != 1)
+        if (!this.attemptToPlaceInExistingPortal(nextWorld, entityIn, rotationYaw))
         {
-            if (!this.attemptToPlaceInExistingPortal(nextWorld, entityIn, rotationYaw))
-            {
-                BlockPos pos = this.makePortal(nextWorld, entityIn);
-                this.definitelyPlaceInExistingPortal(entityIn, rotationYaw, pos);
-            }
+            BlockPos pos = this.makePortal(nextWorld, entityIn);
+            this.definitelyPlaceInExistingPortal(entityIn, rotationYaw, pos);
         }
     }
     
@@ -68,9 +70,9 @@ public class PerpendicularTeleporter implements ITeleporter
     // returns the BlockPos of the portal block that was created
     private BlockPos makePortal(World nextWorld, Entity entityIn)
     {
-    	int xBase = (int)Math.floor(entityIn.posX);
-    	int yBase = (int)Math.floor(entityIn.posY);
-    	int zBase = (int)Math.floor(entityIn.posZ);
+    	int xBase = this.basePos.getX();
+    	int yBase = this.basePos.getY();
+    	int zBase = this.basePos.getZ();
     	
     	WorldHelper.setBlocksInRect(Blocks.AIR.getDefaultState(), nextWorld, xBase-3, yBase-3, zBase-3, xBase+3, yBase+3, zBase+3);
     	BlockPos pos = new BlockPos(xBase, yBase, zBase);
@@ -87,7 +89,7 @@ public class PerpendicularTeleporter implements ITeleporter
     public boolean attemptToPlaceInExistingPortal(World nextWorld, Entity ent, float rotationYaw)
     {
     	// try to get the location of an existing portal
-    	BlockPos pos = this.getExistingPortalLocation(nextWorld, ent);
+    	BlockPos pos = this.getExistingPortalLocation(nextWorld);
     	if (pos != null)
     	{	// if a portal exists at a reasonable location, place the entity there
     		this.definitelyPlaceInExistingPortal(ent, rotationYaw, pos);
@@ -113,11 +115,12 @@ public class PerpendicularTeleporter implements ITeleporter
      * @return	A BlockPos corresponding to the location of an existing portal (in the nextWorld being teleported to), or null
      */
     @Nullable
-    public BlockPos getExistingPortalLocation(World nextWorld, Entity ent)
+    public BlockPos getExistingPortalLocation(World nextWorld)
     {
-    	int xBase = (int)Math.floor(ent.posX);
-    	int yBase = (int)Math.floor(ent.posY);
-    	int zBase = (int)Math.floor(ent.posZ);
+    	/*
+    	int xBase = this.basePos.getX();
+    	int yBase = this.basePos.getY();
+    	int zBase = this.basePos.getZ();
     	
     	int xStart = xBase-5;
     	int xEnd = xBase+5;
@@ -140,6 +143,11 @@ public class PerpendicularTeleporter implements ITeleporter
     				}
     			}
     		}
+    	}*/
+    	
+    	if (nextWorld.getBlockState(this.basePos).getBlock() == BlockLedger.blockWormholeCore)
+    	{
+    		return this.basePos;
     	}
     	
     	// no portal pos found

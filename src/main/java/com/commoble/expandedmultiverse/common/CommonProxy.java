@@ -45,7 +45,7 @@ public class CommonProxy
 		// Entities, Tile Entities, and Dimensions need to be registered here
 		TileEntityLedger.registerTileEntities();
 		//this.registerEntities();
-		this.registerPlanes();
+		DimensionLedger.registerPlanes();
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
 	}
 	
@@ -65,12 +65,5 @@ public class CommonProxy
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		
-	}
-	
-	private void registerPlanes()
-	{
-		DimensionLedger.test_dim_id = DimensionManager.getNextFreeDimId();
-		DimensionLedger.test_dim_type = DimensionType.register("generic_universe", "_generic_universe", DimensionLedger.test_dim_id, WorldProviderGeneric.class, false);
-		DimensionManager.registerDimension(DimensionLedger.test_dim_id,  DimensionLedger.test_dim_type);
 	}
 }

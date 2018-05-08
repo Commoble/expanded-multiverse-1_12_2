@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 
 @Mod(modid = ExpandedMultiverseMod.MODID, version = ExpandedMultiverseMod.VERSION, name=ExpandedMultiverseMod.NAME)
 public class ExpandedMultiverseMod
@@ -49,6 +50,12 @@ public class ExpandedMultiverseMod
     public void postInit(FMLPostInitializationEvent event)
     {
     	proxy.postInit(event);
+    }
+    
+    @EventHandler
+    public void serverStarted(FMLServerStartedEvent event)
+    {
+    	proxy.serverStarted(event);
     }
     
     /**

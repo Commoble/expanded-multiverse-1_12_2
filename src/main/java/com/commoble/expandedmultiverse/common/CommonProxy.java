@@ -1,17 +1,18 @@
 package com.commoble.expandedmultiverse.common;
 
 import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
+import com.commoble.expandedmultiverse.common.multiverse.MultiverseSavedData;
 import com.commoble.expandedmultiverse.common.tileentity.TileEntityLedger;
 import com.commoble.expandedmultiverse.common.world.WorldGenManager;
-import com.commoble.expandedmultiverse.common.world.WorldProviderGeneric;
 
-import net.minecraft.world.DimensionType;
-import net.minecraftforge.common.DimensionManager;
+import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy
@@ -65,5 +66,9 @@ public class CommonProxy
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		
+	}
+
+	public void serverStarted(FMLServerStartedEvent event)
+	{
 	}
 }

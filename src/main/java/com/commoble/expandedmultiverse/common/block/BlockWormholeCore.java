@@ -78,7 +78,7 @@ public class BlockWormholeCore extends BlockContainer
     	// if this is the main world, go to another world
     	if (world.provider.getDimension() == 0)
     	{
-    		int index = pos.hashCode() % ConfigMultiverse.perpendicularUniverseCount;
+    		int index = pos.hashCode() % ConfigMultiverse.perpendicular_universe_count;
     		return DimensionLedger.getPerpendicularUniverseID(index);
     	}
     	else	// if this is ANY OTHER WORLD, go back to the main world

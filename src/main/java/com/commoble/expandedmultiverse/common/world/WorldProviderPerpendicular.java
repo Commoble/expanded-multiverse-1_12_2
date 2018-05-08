@@ -8,7 +8,7 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.storage.WorldInfo;
 
-public class WorldProviderGeneric extends WorldProvider
+public class WorldProviderPerpendicular extends WorldProvider
 {
 	protected long subseed;	// use this seed instead of server seed where possible
 	protected WorldInfo modifiedWorldInfo;	// set of base worldinfo with the seed changed

@@ -4,10 +4,12 @@ import java.util.HashMap;
 
 import com.commoble.expandedmultiverse.common.ConfigMultiverse;
 import com.commoble.expandedmultiverse.common.world.WorldGenManager;
-import com.commoble.expandedmultiverse.common.world.WorldProviderGeneric;
+import com.commoble.expandedmultiverse.common.world.WorldProviderPerpendicular;
 
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 // class for holding dimension-related stuff
 public class DimensionLedger
@@ -17,8 +19,11 @@ public class DimensionLedger
 	
 	public static void registerPlanes()
 	{
+		// this will check for the data glob on the global world file
+		// and initialize the data if it doesn't exist
+		// this will permanently set the data on newly created worlds
+		int max_dims = ConfigMultiverse.perpendicular_universe_count;
 		System.out.println("Registering Expanded Multiverse Dimensions");
-		int max_dims = ConfigMultiverse.perpendicularUniverseCount;
 		DimensionLedger.dim_wrappers = new DimensionWrapper[max_dims];
 		DimensionLedger.idToWrapperMap = new HashMap<Integer, DimensionWrapper>(max_dims);
 		// register this many worlds
@@ -26,7 +31,7 @@ public class DimensionLedger
 		{
 			int id = DimensionManager.getNextFreeDimId();
 			String name = String.format("perp_%d", id);
-			DimensionType dimtype = DimensionType.register(name, "_".concat(name), id, WorldProviderGeneric.class, false);
+			DimensionType dimtype = DimensionType.register(name, "_".concat(name), id, WorldProviderPerpendicular.class, false);
 			dim_wrappers[i] = new DimensionWrapper(id, dimtype);
 			DimensionManager.registerDimension(id, dimtype);
 			idToWrapperMap.put(Integer.valueOf(id), dim_wrappers[i]);

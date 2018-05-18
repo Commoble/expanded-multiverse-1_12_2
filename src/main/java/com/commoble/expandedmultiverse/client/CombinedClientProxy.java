@@ -37,14 +37,6 @@ public class CombinedClientProxy extends CommonProxy
 		// register item renderers here -- the mesher hasn't been initialized yet in preinit
 	}
 	
-	private void registerItemRenderer(ItemModelMesher mesher, Item item)
-	{
-		Minecraft.getMinecraft()
-		.getRenderItem()
-		.getItemModelMesher()
-		.register(item,  0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
-	}
-	
 	@Override
 	public void postInit(FMLPostInitializationEvent event)
 	{

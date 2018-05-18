@@ -28,6 +28,6 @@ public class ConfigMultiverse
 	@LangKey("perpendicular_universe_blargh")
 	@RangeInt(min=1, max=1000)
 	@Comment("The number of different worlds that can be accessed via natural wormholes")*/
-	public static int perpendicular_universe_count = 32;
+	public static int perpendicular_universe_count = 97; // largish prime number
 	
 }

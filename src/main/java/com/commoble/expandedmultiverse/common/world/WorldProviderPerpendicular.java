@@ -36,6 +36,11 @@ public class WorldProviderPerpendicular extends WorldProvider
 	public static final float BASE_MIN_LIGHT = 0F;
 	public static final float MIN_MIN_LIGHT = -0.1F;
 	
+	// multipliers for fog color
+	private double redMultiplier;
+	private double greenMultiplier;
+	private double blueMultiplier;
+	
 	// called during construction after world and worldtype are set
 	@Override
 	protected void init()
@@ -54,6 +59,25 @@ public class WorldProviderPerpendicular extends WorldProvider
 			this.aspectData[i] = -128 + rand.nextInt(256);
 			//this.aspectData[i] = rand.nextInt(EnumWorldAspect.CEILING_FOR_AVERAGE * 2) - rand.nextInt(EnumWorldAspect.CEILING_FOR_AVERAGE);
 		}
+		
+		// calculate fog color multipliers
+		float redFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.CREATION) + 0.5F;
+		float greenFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.LIFE) + 0.5F;
+		float blueFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.DEATH) + 0.5F;
+		float cyanFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.DESTRUCTION) + 0.5F;
+		float goldFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.FORTUNE) + 0.5F;
+		float whiteFactor = this.getAspectFactor(EnumWorldAspect.FATE);
+		float magentaFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.DREAM) + 0.5F;
+		float blackFactor = this.getAspectFactor(EnumWorldAspect.ENTROPY);
+		float highFactor = (whiteFactor + 1F) * 0.5F;
+		float lowFactor = (blackFactor + 1F) * 0.5F;
+		float rgbtotal = redFactor + greenFactor + blueFactor;
+		float cmytotal = cyanFactor + magentaFactor + goldFactor;
+		float combototal = highFactor + lowFactor;
+		
+		this.redMultiplier = ((redFactor/rgbtotal) * highFactor + lowFactor * cyanFactor / cmytotal) / combototal;
+		this.greenMultiplier = ((greenFactor/rgbtotal) * highFactor + lowFactor * magentaFactor / cmytotal) / combototal;
+		this.blueMultiplier = ((blueFactor/rgbtotal) * highFactor + lowFactor * goldFactor / cmytotal) / combototal;
 	}
 	
 	// using the WorldInfo for the primary surface world,
@@ -190,25 +214,11 @@ public class WorldProviderPerpendicular extends WorldProvider
 	{
 		// TODO Auto-generated method stub
 		Vec3d baseFog = super.getFogColor(angle, partialTicks);
-		float redFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.CREATION) + 0.5F;
-		float greenFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.LIFE) + 0.5F;
-		float blueFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.DEATH) + 0.5F;
-		float cyanFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.DESTRUCTION) + 0.5F;
-		float goldFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.FORTUNE) + 0.5F;
-		float whiteFactor = this.getAspectFactor(EnumWorldAspect.FATE);
-		float magentaFactor = 0.5F * this.getAspectFactor(EnumWorldAspect.DREAM) + 0.5F;
-		float blackFactor = this.getAspectFactor(EnumWorldAspect.ENTROPY);
-		float highFactor = (whiteFactor + 1F) * 0.5F;
-		float lowFactor = (blackFactor + 1F) * 0.5F;
-		float rgbtotal = redFactor + greenFactor + blueFactor;
-		float cmytotal = cyanFactor + magentaFactor + goldFactor;
-		float combototal = highFactor + lowFactor;
-		float red = ((float)baseFog.x * (redFactor/rgbtotal) * highFactor + lowFactor * cyanFactor / cmytotal) / combototal;
-		float green = ((float)baseFog.y * (greenFactor/rgbtotal) * highFactor + lowFactor * magentaFactor / cmytotal) / combototal;
-		float blue = ((float)baseFog.z * (blueFactor/rgbtotal) * highFactor + lowFactor * goldFactor / cmytotal) / combototal;
-		//float red = MathHelper.clamp((float)baseFog.x * (1+redFactor) * (1+whiteFactor*.33F) * (1-cyanFactor) * (1-blackFactor*.33F), 0F, 1F);
-		//float green = MathHelper.clamp((float)baseFog.y * (1+greenFactor) * (1+whiteFactor*.33F) * (1-magentaFactor) * (1-blackFactor*.33F), 0F, 1F);
-		//float blue = MathHelper.clamp((float)baseFog.z * (1+blueFactor) * (1+whiteFactor*.33F) * (1-goldFactor) * (1-blackFactor*.33F), 0F, 1F);
+
+		double red = baseFog.x * this.redMultiplier;
+		double green = baseFog.y * this.greenMultiplier;
+		double blue = baseFog.z * this.blueMultiplier;
+
 		return new Vec3d(red, green, blue);
 	}
 

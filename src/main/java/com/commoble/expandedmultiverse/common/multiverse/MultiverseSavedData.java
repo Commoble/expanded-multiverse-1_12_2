@@ -53,7 +53,7 @@ public class MultiverseSavedData extends WorldSavedData
 		if (instance == null)	// nothing in the data yet
 		{
 			instance = new MultiverseSavedData();
-			instance.perpendicular_universe_count = ConfigMultiverse.perpendicular_universe_count;
+			instance.perpendicular_universe_count = DimensionLedger.MAX_DIMS;//ConfigMultiverse.perpendicular_universe_count;
 			storage.setData(DATA_NAME, instance);
 		}
 		

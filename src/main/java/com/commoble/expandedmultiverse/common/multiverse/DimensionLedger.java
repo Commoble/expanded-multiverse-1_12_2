@@ -16,13 +16,14 @@ public class DimensionLedger
 {
 	private static DimensionWrapper[] dim_wrappers;
 	private static HashMap<Integer, DimensionWrapper> idToWrapperMap;
+	public static final int MAX_DIMS = 19;
 	
 	public static void registerPlanes()
 	{
 		// this will check for the data glob on the global world file
 		// and initialize the data if it doesn't exist
 		// this will permanently set the data on newly created worlds
-		int max_dims = ConfigMultiverse.perpendicular_universe_count;
+		int max_dims = MAX_DIMS;//ConfigMultiverse.perpendicular_universe_count;
 		System.out.println("Registering Expanded Multiverse Dimensions");
 		DimensionLedger.dim_wrappers = new DimensionWrapper[max_dims];
 		DimensionLedger.idToWrapperMap = new HashMap<Integer, DimensionWrapper>(max_dims);

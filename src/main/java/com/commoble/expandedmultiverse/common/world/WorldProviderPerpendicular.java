@@ -37,9 +37,9 @@ public class WorldProviderPerpendicular extends WorldProvider
 	public static final float MIN_MIN_LIGHT = -0.1F;
 	
 	// multipliers for fog color
-	private double redMultiplier;
-	private double greenMultiplier;
-	private double blueMultiplier;
+	private double redFogMultiplier;
+	private double greenFogMultiplier;
+	private double blueFogMultiplier;
 	
 	// called during construction after world and worldtype are set
 	@Override
@@ -56,8 +56,7 @@ public class WorldProviderPerpendicular extends WorldProvider
 		for (int i=0; i<EnumWorldAspect.COUNT; i++)
 		{
 			// set aspect in range between -16 and 15
-			this.aspectData[i] = -128 + rand.nextInt(256);
-			//this.aspectData[i] = rand.nextInt(EnumWorldAspect.CEILING_FOR_AVERAGE * 2) - rand.nextInt(EnumWorldAspect.CEILING_FOR_AVERAGE);
+			this.aspectData[i] = rand.nextInt(EnumWorldAspect.CEILING_FOR_AVERAGE * 2) - rand.nextInt(EnumWorldAspect.CEILING_FOR_AVERAGE);
 		}
 		
 		// calculate fog color multipliers
@@ -75,9 +74,9 @@ public class WorldProviderPerpendicular extends WorldProvider
 		float cmytotal = cyanFactor + magentaFactor + goldFactor;
 		float combototal = highFactor + lowFactor;
 		
-		this.redMultiplier = ((redFactor/rgbtotal) * highFactor + lowFactor * cyanFactor / cmytotal) / combototal;
-		this.greenMultiplier = ((greenFactor/rgbtotal) * highFactor + lowFactor * magentaFactor / cmytotal) / combototal;
-		this.blueMultiplier = ((blueFactor/rgbtotal) * highFactor + lowFactor * goldFactor / cmytotal) / combototal;
+		this.redFogMultiplier = (3F * ((redFactor/rgbtotal) * highFactor + lowFactor * cyanFactor / cmytotal) / combototal);
+		this.greenFogMultiplier = (3F * ((greenFactor/rgbtotal) * highFactor + lowFactor * magentaFactor / cmytotal) / combototal);
+		this.blueFogMultiplier = (3F * ((blueFactor/rgbtotal) * highFactor + lowFactor * goldFactor / cmytotal) / combototal);
 	}
 	
 	// using the WorldInfo for the primary surface world,
@@ -111,6 +110,12 @@ public class WorldProviderPerpendicular extends WorldProvider
 
     /**
      * Returns 'true' if in the "main surface world", but 'false' if in the Nether or End dimensions.
+     * If this is false:
+     * -player cannot use a bed
+     * -nether portals will not occasionally spawn zombie pigmen
+     * -default sky will not render, can still use getSkyRenderer
+     * -default clouds will not render, can still use getCloudRenderer
+     * -compass and clock will not work
      */
     public boolean isSurfaceWorld()
     {
@@ -189,6 +194,8 @@ public class WorldProviderPerpendicular extends WorldProvider
 	}
 
 	@Override
+	// the current angle of the sun in the sky, used for lighting, fog color, clock item
+	// this is just a function of time
 	public float calculateCelestialAngle(long worldTime, float partialTicks)
 	{
 		// TODO Auto-generated method stub
@@ -215,9 +222,9 @@ public class WorldProviderPerpendicular extends WorldProvider
 		// TODO Auto-generated method stub
 		Vec3d baseFog = super.getFogColor(angle, partialTicks);
 
-		double red = baseFog.x * this.redMultiplier;
-		double green = baseFog.y * this.greenMultiplier;
-		double blue = baseFog.z * this.blueMultiplier;
+		double red = baseFog.x * this.redFogMultiplier;
+		double green = baseFog.y * this.greenFogMultiplier;
+		double blue = baseFog.z * this.blueFogMultiplier;
 
 		return new Vec3d(red, green, blue);
 	}
@@ -258,10 +265,11 @@ public class WorldProviderPerpendicular extends WorldProvider
 	}
 
 	@Override
+	// in vanilla, this is true for the nether, false everywhere else
 	public boolean doesXZShowFog(int x, int z)
 	{
 		// TODO Auto-generated method stub
-		return super.doesXZShowFog(x, z);
+		return false;
 	}
 
 	@Override
@@ -279,13 +287,18 @@ public class WorldProviderPerpendicular extends WorldProvider
 	}
 
 	@Override
+	// affects whether the sky produces light, but also enables weather
 	public boolean hasSkyLight()
 	{
 		// TODO Auto-generated method stub
-		return super.hasSkyLight();
+		return true; //super.hasSkyLight();
 	}
 
 	@Override
+	// if true:
+	// -lava will flow faster
+	// -plant blocks will not generate
+	// -also affects map item scale for some reason
 	public boolean isNether()
 	{
 		// TODO Auto-generated method stub
@@ -402,7 +415,7 @@ public class WorldProviderPerpendicular extends WorldProvider
 	public boolean shouldMapSpin(String entity, double x, double z, double rotation)
 	{
 		// TODO Auto-generated method stub
-		return super.shouldMapSpin(entity, x, z, rotation);
+		return false; //super.shouldMapSpin(entity, x, z, rotation);
 	}
 
 	@Override

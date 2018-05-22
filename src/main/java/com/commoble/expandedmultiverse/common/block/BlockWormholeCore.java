@@ -2,7 +2,6 @@ package com.commoble.expandedmultiverse.common.block;
 
 import javax.annotation.Nullable;
 
-import com.commoble.expandedmultiverse.common.ConfigMultiverse;
 import com.commoble.expandedmultiverse.common.item.ItemLedger;
 import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
 import com.commoble.expandedmultiverse.common.multiverse.PerpendicularTeleporter;
@@ -22,6 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -65,6 +65,7 @@ public class BlockWormholeCore extends BlockContainer
     		}
     		else
     		{
+    			world.notifyBlockUpdate(pos, this.getDefaultState(), this.getDefaultState(), 3);
                 playerIn.changeDimension(this.getDestinationDimensionID(world, pos), this.getTeleporter(pos));
                 return true;
     		}

@@ -16,7 +16,16 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent e)
 	{
+		// regular items
+		registerItemRenderer(ItemLedger.spyglassItem);
+		
+		// itemblocks
 		registerItemblockRenderer(ItemLedger.wormholeCoreItemBlock);
+	}
+	
+	private static void registerItemRenderer(Item item)
+	{
+		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
 	
 	private static void registerItemblockRenderer(ItemBlock iblock)

@@ -27,15 +27,19 @@ public class ItemLedger
 	};
 	
 	public static ItemBlock wormholeCoreItemBlock;
+	public static ItemSpyglass spyglassItem;
 	
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		wormholeCoreItemBlock = registerItemBlock(event.getRegistry(), new ItemBlock(BlockLedger.blockWormholeCore), "wormholecore");
+		IForgeRegistry<Item> registry = event.getRegistry();
+		
+		wormholeCoreItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockWormholeCore), "wormholecore");
 		//grinderItemBlock = registerItemBlock(event.getRegistry(), new ItemBlock(BlockLedger.grinderBlock), "grinder");
 		//grinderItemBlock.setCreativeTab(trtab);
+		spyglassItem = registerItem(registry, new ItemSpyglass(), "spyglass");
 	}
 	
-	private static Item registerItem(IForgeRegistry<Item> registry, Item newItem, String name)
+	private static <T extends Item> T registerItem(IForgeRegistry<Item> registry, T newItem, String name)
 	{
 		name = ExpandedMultiverseMod.appendPrefix(name);
 		newItem.setUnlocalizedName(name);

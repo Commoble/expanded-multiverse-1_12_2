@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.commoble.expandedmultiverse.common.block.BlockLedger;
 import com.commoble.expandedmultiverse.common.world.WorldHelper;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -53,6 +54,7 @@ public class PerpendicularTeleporter implements ITeleporter
     	if (!entity.world.isRemote)
     	{	// don't run on the client
             placeInPortal(nextWorld, entity, yaw);
+            nextWorld.notifyNeighborsOfStateChange(this.basePos, nextWorld.getBlockState(this.basePos).getBlock(), false);
     	}
     }
 
@@ -103,10 +105,23 @@ public class PerpendicularTeleporter implements ITeleporter
     
     public void definitelyPlaceInExistingPortal(Entity ent, float rotationYaw, BlockPos pos)
     {
-        ent.setLocationAndAngles((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), ent.rotationYaw, 0.0F);
+    	double x = (double)pos.getX() + 0.5D;
+    	double y = (double)pos.getY() + 5D;
+    	double z = (double)pos.getZ() + 0.5D;
+    	
         ent.motionX = 0.0D;
         ent.motionY = 0.0D;
         ent.motionZ = 0.0D;
+    	
+    	if (ent instanceof EntityPlayerMP)
+    	{
+            ((EntityPlayerMP)ent).connection.setPlayerLocation(x, y, z, ent.rotationYaw, ent.rotationPitch);
+    	}
+    	else
+    	{
+            ent.setLocationAndAngles(x, y, z, ent.rotationYaw, ent.rotationPitch);
+    	}
+        
     }
     
     /**

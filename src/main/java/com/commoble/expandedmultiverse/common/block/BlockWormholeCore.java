@@ -137,6 +137,16 @@ public class BlockWormholeCore extends BlockContainer
     
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
-        return EnumBlockRenderType.MODEL;
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+    
+    public boolean isOpaqueCube(IBlockState state)
+    {
+    	return false;
+    }
+    
+    public boolean isFullCube(IBlockState state)
+    {
+    	return false;
     }
 }

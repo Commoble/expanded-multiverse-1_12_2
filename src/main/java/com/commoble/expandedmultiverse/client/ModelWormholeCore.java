@@ -9,13 +9,13 @@ public class ModelWormholeCore extends ModelBase
 	
 	public ModelWormholeCore()
 	{
-		this.model = new ModelRenderer(this).setTextureOffset(0, 0).addBox(0, 0, 0, 1, 1, 1);
-		this.model.setRotationPoint(0.5F, 0F, 0F);
+		this.model = new ModelRenderer(this).setTextureOffset(0, 0).addBox(-8F, 0F, -8F, 16, 16, 16);
+		this.model.setRotationPoint(8F, 0F, 8F);
 	}
 	
 	public void render(float angle)
 	{
 		this.model.rotateAngleY = angle;
-		this.model.render(1F);
+		this.model.render(0.0625F);
 	}
 }

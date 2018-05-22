@@ -1,11 +1,13 @@
 package com.commoble.expandedmultiverse.client;
 
 import com.commoble.expandedmultiverse.common.CommonProxy;
+import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,6 +29,7 @@ public class CombinedClientProxy extends CommonProxy
 		// entity renderers
 		
 		// tile entity renderers
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWormholeCore.class, new TESRWormholeCore());
 	}
 	
 	@Override

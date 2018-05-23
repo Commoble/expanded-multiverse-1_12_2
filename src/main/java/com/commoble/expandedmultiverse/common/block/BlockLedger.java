@@ -13,9 +13,11 @@ public class BlockLedger
 {	
 	// name strings
 	public static final String wormholeCore_name = "wormholecore";
+	public static final String stabilizer_name = "stabilizer";
 	
 	// block fields
 	public static BlockWormholeCore blockWormholeCore;
+	public static BlockStabilizer blockStabilizer;
 	
 	// register all the blocks, called by RegistryEventHandler
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -23,6 +25,7 @@ public class BlockLedger
 		IForgeRegistry<Block> registry = event.getRegistry();
 		//grinderBlock = (BlockGrinder)registerBlock(event.getRegistry(), new BlockGrinder(), "grinder");
 		BlockLedger.blockWormholeCore = registerBlock(registry, new BlockWormholeCore(), wormholeCore_name);
+		BlockLedger.blockStabilizer = registerBlock(registry, new BlockStabilizer(), stabilizer_name);
 	}
 	
 	private static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T newBlock, String name)

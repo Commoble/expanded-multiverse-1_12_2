@@ -1,0 +1,17 @@
+{
+    "result": {"item": "expandedmultiverse:stabilizer"},
+    "pattern":
+    [
+        "rEr",
+        "wSw",
+        "wSw"  
+    ],
+    "type": "forge:ore_shaped",
+    "key":
+    {
+        "r": {"item": "minecraft:redstone"},
+        "E": {"item": "minecraft:ender_pearl"},
+        "w": {"type": "forge:ore_dict", "ore": "plankWood"},
+        "S": {"type": "forge:ore_dict", "ore": "stone"}
+    }
+}

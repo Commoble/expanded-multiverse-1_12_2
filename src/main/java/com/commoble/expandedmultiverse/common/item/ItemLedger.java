@@ -18,7 +18,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ItemLedger
 {
 	// creative tab for the stuff
-	public static final CreativeTabs emtab = new CreativeTabs("expandedmultiverse") {
+	public static final CreativeTabs emtab = new CreativeTabs(ExpandedMultiverseMod.MODID) {
 		@Override
 		public ItemStack getTabIconItem()
 		{
@@ -26,17 +26,25 @@ public class ItemLedger
 		}
 	};
 	
+	// names of true (non-itemblock) items
+	public static final String spyglass_name = "spyglass";
+	
+	// itemblocks
 	public static ItemBlock wormholeCoreItemBlock;
+	public static ItemBlock stabilizerItemBlock;
+	
+	// true items
 	public static ItemSpyglass spyglassItem;
 	
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
 		IForgeRegistry<Item> registry = event.getRegistry();
 		
-		wormholeCoreItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockWormholeCore), "wormholecore");
+		wormholeCoreItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockWormholeCore), BlockLedger.wormholeCore_name);
+		stabilizerItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockStabilizer), BlockLedger.stabilizer_name);
 		//grinderItemBlock = registerItemBlock(event.getRegistry(), new ItemBlock(BlockLedger.grinderBlock), "grinder");
 		//grinderItemBlock.setCreativeTab(trtab);
-		spyglassItem = registerItem(registry, new ItemSpyglass(), "spyglass");
+		spyglassItem = registerItem(registry, new ItemSpyglass(), ItemLedger.spyglass_name);
 	}
 	
 	private static <T extends Item> T registerItem(IForgeRegistry<Item> registry, T newItem, String name)

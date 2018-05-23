@@ -21,6 +21,7 @@ public class ClientEventHandler
 		
 		// itemblocks
 		registerItemblockRenderer(ItemLedger.wormholeCoreItemBlock);
+		registerItemblockRenderer(ItemLedger.stabilizerItemBlock);
 	}
 	
 	private static void registerItemRenderer(Item item)

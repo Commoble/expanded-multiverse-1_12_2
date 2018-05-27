@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.client;
+package com.commoble.expandedmultiverse.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

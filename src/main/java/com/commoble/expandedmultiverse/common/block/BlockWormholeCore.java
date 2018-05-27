@@ -51,7 +51,7 @@ public class BlockWormholeCore extends BlockContainer
     /**
      * Called when the block is right clicked by a player.
      */
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    /*(public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
     	if (world.isRemote || !(playerIn instanceof EntityPlayerMP))
     	{
@@ -70,7 +70,7 @@ public class BlockWormholeCore extends BlockContainer
                 return true;
     		}
     	}
-    }
+    }*/
 
     // get the ID of the destination world
     // based on the world the traveller is standing in *before* travel
@@ -91,6 +91,15 @@ public class BlockWormholeCore extends BlockContainer
     public ITeleporter getTeleporter(BlockPos pos)
     {
     	return new PerpendicularTeleporter(pos);
+    }
+    
+    public static void activateWormhole(World world, BlockPos pos)
+    {
+    	TileEntity te = world.getTileEntity(pos);
+    	if (te instanceof TileEntityWormholeCore) // just in case
+    	{
+    		((TileEntityWormholeCore)te).activateWormhole(world, pos);
+    	}
     }
     
     @Override

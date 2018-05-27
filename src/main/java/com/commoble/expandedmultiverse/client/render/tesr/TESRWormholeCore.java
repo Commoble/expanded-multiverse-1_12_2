@@ -1,5 +1,6 @@
-package com.commoble.expandedmultiverse.client;
+package com.commoble.expandedmultiverse.client.render.tesr;
 
+import com.commoble.expandedmultiverse.client.model.ModelWormholeCore;
 import com.commoble.expandedmultiverse.common.item.ItemLedger;
 import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 import com.commoble.expandedmultiverse.common.util.MathBuddy;
@@ -20,8 +21,8 @@ public class TESRWormholeCore extends TileEntitySpecialRenderer<TileEntityWormho
 	public void render(TileEntityWormholeCore te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		if (player != null && player.getHeldItemMainhand().getItem() == ItemLedger.spyglassItem)
-		{
+		if (te.getIsActive() || (player != null && player.getHeldItemMainhand().getItem() == ItemLedger.spyglassItem))
+		{	// if inactive, player must be holding a spyglass to see this
 			GlStateManager.pushMatrix();
 			GlStateManager.translate((float)x,  (float)y,  (float)z);
 			

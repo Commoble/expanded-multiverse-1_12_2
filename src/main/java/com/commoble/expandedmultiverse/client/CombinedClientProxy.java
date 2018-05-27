@@ -1,5 +1,6 @@
 package com.commoble.expandedmultiverse.client;
 
+import com.commoble.expandedmultiverse.client.render.tesr.TESRWormholeCore;
 import com.commoble.expandedmultiverse.common.CommonProxy;
 import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 

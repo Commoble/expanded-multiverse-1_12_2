@@ -1,5 +1,7 @@
 package com.commoble.expandedmultiverse.common.block;
 
+import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
 import com.commoble.expandedmultiverse.common.item.ItemLedger;
 
 import net.minecraft.block.Block;
@@ -29,6 +31,10 @@ public class BlockStabilizer extends Block
 		{
 			BlockWormholeCore.activateWormhole(world, pos.up(2));
 		}
+		
+		IPortalLoaderCapability cap = playerIn.getCapability(PortalLoaderProvider.PORTAL_LOADER_CAP, null);
+		cap.addTicksInPortal(1);
+		System.out.println(cap.getTicksInPortal());
 		
 		return true;
 	}

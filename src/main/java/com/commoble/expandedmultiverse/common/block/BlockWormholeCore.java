@@ -2,6 +2,9 @@ package com.commoble.expandedmultiverse.common.block;
 
 import javax.annotation.Nullable;
 
+import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
+import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
 import com.commoble.expandedmultiverse.common.item.ItemLedger;
 import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
 import com.commoble.expandedmultiverse.common.multiverse.PerpendicularTeleporter;
@@ -13,6 +16,7 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,8 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -100,6 +102,54 @@ public class BlockWormholeCore extends BlockContainer
     	{
     		((TileEntityWormholeCore)te).activateWormhole(world, pos);
     	}
+    }
+
+    /**
+     * Called When an Entity Collided with the Block
+     */
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    {
+        if (entityIn instanceof EntityPlayer)
+        {
+        	TileEntityWormholeCore te = (TileEntityWormholeCore)worldIn.getTileEntity(pos);
+        	if (te.getIsActive())
+        	{
+            	IPortalLoaderCapability cap = entityIn.getCapability(PortalLoaderProvider.PORTAL_LOADER_CAP, null);
+            	int ticksInPortal = cap.getTicksInPortal();
+            	int cooldown = cap.getCooldownTicks();
+            	
+            	// if the player is standing in a portal waiting for a new teleport
+            	if (cooldown >= 0)
+            	{
+            		// reset the cooldown
+            		cap.setCooldownTicks(PortalLoaderCapability.TICKS_BEFORE_EFFECT_DISSIPATES);
+            		if (ticksInPortal < PortalLoaderCapability.TICKS_TO_INITIATE_TELEPORT)
+            		{
+            			cap.addTicksInPortal(1);
+            		}
+            		else
+            		{	
+            			// if on server and entity is not attached to another entity
+            			if (!worldIn.isRemote
+            					&& !entityIn.isRiding()
+            					&& !entityIn.isBeingRidden())
+            			{
+
+                            // make sure old player doesn't reteleport
+                            cap.setCooldownTicks(-PortalLoaderCapability.TICKS_TO_RESET_TELEPORT);
+                            
+                            entityIn.changeDimension(this.getDestinationDimensionID(worldIn, pos), this.getTeleporter(pos));
+            			}
+            		}
+            		
+            		
+            	}
+            	else // if the player is standing in a portal after just having teleported
+            	{
+            		cap.setCooldownTicks(-PortalLoaderCapability.TICKS_TO_RESET_TELEPORT);
+            	}
+        	}
+        }
     }
     
     @Override

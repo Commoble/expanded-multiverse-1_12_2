@@ -32,10 +32,6 @@ public class BlockStabilizer extends Block
 			BlockWormholeCore.activateWormhole(world, pos.up(2));
 		}
 		
-		IPortalLoaderCapability cap = playerIn.getCapability(PortalLoaderProvider.PORTAL_LOADER_CAP, null);
-		cap.addTicksInPortal(1);
-		System.out.println(cap.getTicksInPortal());
-		
 		return true;
 	}
 }

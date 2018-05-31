@@ -138,7 +138,7 @@ public class BlockWormholeCore extends BlockContainer
                             // make sure old player doesn't reteleport
                             cap.setCooldownTicks(-PortalLoaderCapability.TICKS_TO_RESET_TELEPORT);
                             
-                            //entityIn.changeDimension(this.getDestinationDimensionID(worldIn, pos), this.getTeleporter(pos));
+                            entityIn.changeDimension(this.getDestinationDimensionID(worldIn, pos), this.getTeleporter(pos));
             			}
             		}
             		

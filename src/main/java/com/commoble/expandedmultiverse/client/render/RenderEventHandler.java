@@ -1,5 +1,8 @@
 package com.commoble.expandedmultiverse.client.render;
 
+import java.util.LinkedList;
+import java.util.Random;
+
 import com.commoble.expandedmultiverse.client.render.overlay.SpyglassOverlayRenderer;
 import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
 import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
@@ -8,13 +11,10 @@ import com.commoble.expandedmultiverse.common.item.ItemLedger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.GlStateManager.DestFactor;
-import net.minecraft.client.renderer.GlStateManager.SourceFactor;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -43,18 +43,44 @@ public class RenderEventHandler
 			
 			if (cap.getTicksInPortal() > 0)
 			{
-				RenderEventHandler.renderWormholeOverlay(mc, cap, e.getResolution().getScaledWidth(), e.getResolution().getScaledHeight());
+				RenderEventHandler.renderWormholeOverlay(mc, player, cap, e.getResolution().getScaledWidth(), e.getResolution().getScaledHeight());
 			}
 		}
 	}
 	
-	public static void renderWormholeOverlay(Minecraft minecraft, IPortalLoaderCapability cap, int screenWidth, int screenHeight)
+	public static void renderWormholeOverlay(Minecraft minecraft, EntityPlayerSP player, IPortalLoaderCapability cap, int screenWidth, int screenHeight)
 	{
-		float multiplier = (float)cap.getTicksInPortal() / (float)PortalLoaderCapability.TICKS_TO_INITIATE_TELEPORT;
+		// do the overlay
+		int ticks = cap.getTicksInPortal();
+		float multiplier = (float)ticks / (float)PortalLoaderCapability.TICKS_TO_INITIATE_TELEPORT;
 		float red = 0.9F * multiplier;
 		float green = 0.4F * multiplier + 0.1F;
 		float blue = 0.8F * multiplier;
 		float alpha = 0.9F * multiplier;
 		RenderBuddy.drawRect(0, 0, screenWidth, screenHeight, red, green, blue, alpha);
+		
+		// then spawn some funky particles everywhere
+		World world = player.world;
+		Random rand = world.rand;
+		LinkedList<Vec3d> particleSpawnList = new LinkedList<Vec3d>();
+		
+		// the exact player position here isn't important
+		double xBase = player.posX;
+		double yBase = player.posY;
+		double zBase = player.posZ;
+		
+		for (int i = 0; i<ticks; i++)
+		{
+			double xOff = rand.nextDouble()*40D - 20D;	// -20 to 20ish
+			double yOff = rand.nextDouble()*40D - 20D;
+			double zOff = rand.nextDouble()*40D - 20D;
+			
+			particleSpawnList.add(new Vec3d(xBase + xOff, yBase + yOff, zBase + zOff));
+		}
+		
+		for (Vec3d vec : particleSpawnList)
+		{
+			world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, vec.x, vec.y, vec.z, 0D, ((double)ticks)/60D, 0D);
+		}
 	}
 }

@@ -21,7 +21,7 @@ public class PortalLoaderCapability implements IPortalLoaderCapability
 	/**
 	 * How many ticks the player must stand in the wormhole for to initiate a teleport
 	 */
-	public static final int TICKS_TO_INITIATE_TELEPORT = 60;
+	public static final int TICKS_TO_INITIATE_TELEPORT = 100;
 	
 	/**
 	 * If the player leaves a wormhole before the teleport initiates, the game will

@@ -138,7 +138,7 @@ public class BlockWormholeCore extends BlockContainer
                             // make sure old player doesn't reteleport
                             cap.setCooldownTicks(-PortalLoaderCapability.TICKS_TO_RESET_TELEPORT);
                             
-                            entityIn.changeDimension(this.getDestinationDimensionID(worldIn, pos), this.getTeleporter(pos));
+                            //entityIn.changeDimension(this.getDestinationDimensionID(worldIn, pos), this.getTeleporter(pos));
             			}
             		}
             		
@@ -147,6 +147,7 @@ public class BlockWormholeCore extends BlockContainer
             	else // if the player is standing in a portal after just having teleported
             	{
             		cap.setCooldownTicks(-PortalLoaderCapability.TICKS_TO_RESET_TELEPORT);
+            		cap.setTicksInPortal(PortalLoaderCapability.TICKS_TO_INITIATE_TELEPORT - 1);
             	}
         	}
         }

@@ -38,6 +38,16 @@ public class RenderBuddy
      */
     public static void drawRect(int left, int top, int right, int bottom, int color)
     {
+        float alpha = (float)(color >> 24 & 255) / 255.0F;
+        float red = (float)(color >> 16 & 255) / 255.0F;
+        float green = (float)(color >> 8 & 255) / 255.0F;
+        float blue = (float)(color & 255) / 255.0F;
+        
+        RenderBuddy.drawRect(left, top, right, bottom, red, green, blue, alpha);
+    }
+    
+    public static void drawRect(int left, int top, int right, int bottom, float red, float green, float blue, float alpha)
+    {
         if (left < right)
         {
             int i = left;
@@ -52,16 +62,15 @@ public class RenderBuddy
             bottom = j;
         }
 
-        float f3 = (float)(color >> 24 & 255) / 255.0F;
-        float f = (float)(color >> 16 & 255) / 255.0F;
-        float f1 = (float)(color >> 8 & 255) / 255.0F;
-        float f2 = (float)(color & 255) / 255.0F;
+		GlStateManager.pushAttrib();
+		GlStateManager.pushMatrix();
+        
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.color(f, f1, f2, f3);
+        GlStateManager.color(red, green, blue, alpha);
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION);
         bufferbuilder.pos((double)left, (double)bottom, 0.0D).endVertex();
         bufferbuilder.pos((double)right, (double)bottom, 0.0D).endVertex();
@@ -70,5 +79,7 @@ public class RenderBuddy
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+		GlStateManager.popMatrix();
+		GlStateManager.popAttrib();
     }
 }

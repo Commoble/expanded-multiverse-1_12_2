@@ -16,9 +16,9 @@ import net.minecraft.util.ResourceLocation;
 public class SpyglassOverlayRenderer
 {
 	// the texture that restricts the player's view
-	private final static ResourceLocation spyglassOverlay =
+	public final static ResourceLocation spyglassOverlay =
 			new ResourceLocation(ExpandedMultiverseMod.MODID, "textures/overlay/scope_full.png");
-	private final static ResourceLocation spyglassMask =
+	public final static ResourceLocation spyglassMask =
 			new ResourceLocation(ExpandedMultiverseMod.MODID, "textures/overlay/scope_mask.png");
 	
 	private static final int OVERLAY_SIZE = 256;
@@ -26,7 +26,6 @@ public class SpyglassOverlayRenderer
 	
 	public static void render(Minecraft mc, int screenWidth, int screenHeight)
 	{
-		Tessellator.getInstance().getBuffer();
 		// save the current state of OpenGL to restore it later
 		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glPushMatrix();

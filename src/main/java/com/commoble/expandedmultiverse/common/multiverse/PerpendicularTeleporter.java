@@ -106,7 +106,7 @@ public class PerpendicularTeleporter implements ITeleporter
     public void definitelyPlaceInExistingPortal(Entity ent, float rotationYaw, BlockPos pos)
     {
     	double x = (double)pos.getX() + 0.5D;
-    	double y = (double)pos.getY() + 5D;
+    	double y = (double)pos.getY() + 0.5D;
     	double z = (double)pos.getZ() + 0.5D;
     	
         ent.motionX = 0.0D;

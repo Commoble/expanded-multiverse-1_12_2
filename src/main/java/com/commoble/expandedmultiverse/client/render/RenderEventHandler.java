@@ -53,10 +53,10 @@ public class RenderEventHandler
 		// do the overlay
 		int ticks = cap.getTicksInPortal();
 		float multiplier = (float)ticks / (float)PortalLoaderCapability.TICKS_TO_INITIATE_TELEPORT;
-		float red = 0.9F * multiplier;
-		float green = 0.4F * multiplier + 0.1F;
-		float blue = 0.8F * multiplier;
-		float alpha = 0.9F * multiplier;
+		float red = 0.1F * multiplier + 0.8F;
+		float green = 0.8F * multiplier + 0.1F;
+		float blue = 0.1F * multiplier + 0.8F;
+		float alpha = 0.8F * multiplier;
 		RenderBuddy.drawRect(0, 0, screenWidth, screenHeight, red, green, blue, alpha);
 		
 		// then spawn some funky particles everywhere
@@ -69,18 +69,18 @@ public class RenderEventHandler
 		double yBase = player.posY;
 		double zBase = player.posZ;
 		
-		for (int i = 0; i<ticks; i++)
+		for (int i = 0; i<ticks*2; i++)
 		{
-			double xOff = rand.nextDouble()*40D - 20D;	// -20 to 20ish
-			double yOff = rand.nextDouble()*40D - 20D;
-			double zOff = rand.nextDouble()*40D - 20D;
+			double xOff = rand.nextDouble()*10D - 5D;	// -20 to 20ish
+			double yOff = rand.nextDouble()*10D - 5D;
+			double zOff = rand.nextDouble()*10D - 5D;
 			
 			particleSpawnList.add(new Vec3d(xBase + xOff, yBase + yOff, zBase + zOff));
 		}
 		
 		for (Vec3d vec : particleSpawnList)
 		{
-			world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, vec.x, vec.y, vec.z, 0D, ((double)ticks)/60D, 0D);
+			world.spawnParticle(EnumParticleTypes.END_ROD, vec.x, vec.y, vec.z, 0D, ((double)ticks)/5000D, 0D);
 		}
 	}
 }

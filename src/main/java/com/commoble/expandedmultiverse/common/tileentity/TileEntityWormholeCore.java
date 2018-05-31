@@ -1,12 +1,11 @@
 package com.commoble.expandedmultiverse.common.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 public class TileEntityWormholeCore extends TileEntity
 {
@@ -30,7 +29,6 @@ public class TileEntityWormholeCore extends TileEntity
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
-		// TODO Auto-generated method stub
 		this.isActive = compound.getBoolean(TileEntityWormholeCore.IS_ACTIVE_NBT_KEY);
 		super.readFromNBT(compound);
 	}
@@ -38,8 +36,34 @@ public class TileEntityWormholeCore extends TileEntity
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		// TODO Auto-generated method stub
 		compound.setBoolean(TileEntityWormholeCore.IS_ACTIVE_NBT_KEY, this.isActive);
 		return super.writeToNBT(compound);
 	}
+	
+	// called whenever chunkdata is sent to client
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		return writeToNBT(new NBTTagCompound());
+	}
+	
+	// prepare a packet to sinc TE to client
+	// this currently sends the entire NBT data in the packet
+	// consider whittling the packet down if TE data becomes large
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.writeToNBT(nbt);
+		return new SPacketUpdateTileEntity(getPos(), 1, nbt);
+	}
+	
+	// get packet from server and read it into client TE
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+	{
+		this.readFromNBT(packet.getNbtCompound());
+	}
+	
+	
 }

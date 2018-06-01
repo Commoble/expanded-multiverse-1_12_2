@@ -1,5 +1,7 @@
 package com.commoble.expandedmultiverse.common.world;
 
+import java.util.function.Predicate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -36,6 +38,38 @@ public class WorldHelper
 		for (BlockPos pos : BlockPos.getAllInBoxMutable(xMin, yMin, zMin, xMax, yMax, zMax))
 		{
 			world.setBlockState(pos, state);
+		}
+	}
+	
+	/**
+	 * As setBlocksInRect, except it will not alter blockstates for which the predicate returns true
+	 * @param state
+	 * @param world
+	 * @param xMin
+	 * @param yMin
+	 * @param zMin
+	 * @param xMax
+	 * @param yMax
+	 * @param zMax
+	 * @param pred
+	 */
+	public static void setBlocksInRectExcept(IBlockState state, World world, int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, Predicate<IBlockState> pred)
+	{
+		if (yMin < 0)
+		{
+			yMin = 0;
+		}
+		if (yMax > world.getActualHeight() - 1)
+		{
+			yMax = world.getActualHeight() - 1;
+		}
+		for (BlockPos pos : BlockPos.getAllInBoxMutable(xMin, yMin, zMin, xMax, yMax, zMax))
+		{
+			IBlockState checkState = world.getBlockState(pos);
+			if (!pred.test(checkState))
+			{
+				world.setBlockState(pos, state);
+			}
 		}
 	}
 }

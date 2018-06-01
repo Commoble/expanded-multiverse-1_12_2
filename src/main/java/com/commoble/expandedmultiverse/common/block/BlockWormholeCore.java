@@ -100,7 +100,7 @@ public class BlockWormholeCore extends BlockContainer
     	TileEntity te = world.getTileEntity(pos);
     	if (te instanceof TileEntityWormholeCore) // just in case
     	{
-    		((TileEntityWormholeCore)te).activateWormhole(world, pos);
+    		((TileEntityWormholeCore)te).activateWormhole();
     	}
     }
 

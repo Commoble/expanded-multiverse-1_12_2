@@ -1,22 +1,22 @@
 package com.commoble.expandedmultiverse.common.multiverse;
 
-import java.util.Random;
+import java.util.function.Predicate;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.commoble.expandedmultiverse.common.block.BlockLedger;
+import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 import com.commoble.expandedmultiverse.common.world.WorldHelper;
 
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ITeleporter;
 
 /**
@@ -76,9 +76,19 @@ public class PerpendicularTeleporter implements ITeleporter
     	int yBase = this.basePos.getY();
     	int zBase = this.basePos.getZ();
     	
-    	WorldHelper.setBlocksInRect(Blocks.AIR.getDefaultState(), nextWorld, xBase-3, yBase-3, zBase-3, xBase+3, yBase+3, zBase+3);
+    	// set all blocks in a small cube around the exit point to air except TE blocks
+    	Predicate<IBlockState> pred = t -> t.getBlock() instanceof ITileEntityProvider;
+    	WorldHelper.setBlocksInRectExcept(Blocks.AIR.getDefaultState(), nextWorld, xBase-1, yBase-1, zBase-1, xBase+1, yBase+1, zBase+1, pred);
+    	
+    	// set the center point to wormhole and the point below that to air, overwriting any block
     	BlockPos pos = new BlockPos(xBase, yBase, zBase);
     	nextWorld.setBlockState(pos, BlockLedger.blockWormholeCore.getDefaultState());
+    	TileEntity te = nextWorld.getTileEntity(pos);
+    	if (te instanceof TileEntityWormholeCore)
+    	{
+    		((TileEntityWormholeCore)te).activateWormhole();
+    	}
+    	nextWorld.setBlockToAir(pos.down());
     	return pos;
     }
     
@@ -106,7 +116,7 @@ public class PerpendicularTeleporter implements ITeleporter
     public void definitelyPlaceInExistingPortal(Entity ent, float rotationYaw, BlockPos pos)
     {
     	double x = (double)pos.getX() + 0.5D;
-    	double y = (double)pos.getY() + 0.5D;
+    	double y = (double)pos.getY() - 0.5D;
     	double z = (double)pos.getZ() + 0.5D;
     	
         ent.motionX = 0.0D;
@@ -132,33 +142,7 @@ public class PerpendicularTeleporter implements ITeleporter
     @Nullable
     public BlockPos getExistingPortalLocation(World nextWorld)
     {
-    	/*
-    	int xBase = this.basePos.getX();
-    	int yBase = this.basePos.getY();
-    	int zBase = this.basePos.getZ();
-    	
-    	int xStart = xBase-5;
-    	int xEnd = xBase+5;
-    	int zStart = zBase-5;
-    	int zEnd = zBase+5;
-    	
-    	int yStart = (yBase-5 > 0) ? yBase-5 : 0;
-    	int yEnd = (yBase+5 < nextWorld.getHeight() - 1) ? yBase+5 : nextWorld.getHeight();
-    	// just check in a cube around the point for now
-    	for (int x=xStart; x<=xEnd; x++)
-    	{
-    		for (int y=yStart; y<=yEnd; y++)
-    		{
-    			for (int z=zStart; z<=zEnd; z++)
-    			{
-    				BlockPos checkPos = new BlockPos(x,y,z);
-    				if (nextWorld.getBlockState(new BlockPos(x,y,z)).getBlock() == BlockLedger.blockWormholeCore)
-    				{
-    					return checkPos;
-    				}
-    			}
-    		}
-    	}*/
+
     	
     	if (nextWorld.getBlockState(this.basePos).getBlock() == BlockLedger.blockWormholeCore)
     	{

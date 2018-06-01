@@ -19,7 +19,7 @@ public class TileEntityWormholeCore extends TileEntity
 		this.isActive = false;
 	}
 
-	public void activateWormhole(World world, BlockPos pos)
+	public void activateWormhole()
 	{
 		if (!this.getIsActive())
 		{

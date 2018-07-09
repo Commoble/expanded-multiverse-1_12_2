@@ -37,13 +37,6 @@ public class CommonProxy
 	 */
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-		Property conf;
-		config.load();
-		
-		// TODO setup config file here
-		
-		config.save();
 		
 		// Registration
 		// Blocks, Enchantments, Items, Potions, SoundEvents, and Biomes should be registered with registry events

@@ -100,7 +100,7 @@ public class WorldProviderPerpendicular extends WorldProvider
 	public DimensionType getDimensionType()
 	{
 		// TODO Auto-generated method stub
-		return DimensionLedger.getPerpTypeFromID(this.getDimension());
+		return DimensionLedger.perpendicularDimensionType;//DimensionLedger.getPerpTypeFromID(this.getDimension());
 	}
 
     public IChunkGenerator createChunkGenerator()

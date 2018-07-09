@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Config(modid=ExpandedMultiverseMod.MODID, type=Type.INSTANCE, category="multiverse")
 public class ConfigMultiverse
 {
-	/*@SubscribeEvent
+	@SubscribeEvent
 	public void onConfigChangedEvent(OnConfigChangedEvent event)
 	{
 		if (event.getModID().equals(ExpandedMultiverseMod.MODID))
@@ -25,9 +25,11 @@ public class ConfigMultiverse
 	}
 	
 	// TODO consider letting min be 0 and handle appropriately
-	@LangKey("perpendicular_universe_blargh")
 	@RangeInt(min=1, max=1000)
-	@Comment("The number of different worlds that can be accessed via natural wormholes")*/
-	//public static int perpendicular_universe_count = 97; // largish prime number
+	@Comment("The number of different worlds that can be accessed via natural wormholes. If you change this and then play on a world that used the old number, many things will break, so don't do that.")
+	public static int perpendicular_universe_count = 97; // largish prime number
+
+	@Comment("The first ID for perpendicular universe dimensions. The IDs used will form a continuous block of the size of perpendicular_universe_count.")
+	public static int perpendicular_universe_first_ID = 7171117;
 	
 }

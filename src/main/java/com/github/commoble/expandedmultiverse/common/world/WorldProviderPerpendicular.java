@@ -1,8 +1,8 @@
-package com.commoble.expandedmultiverse.common.world;
+package com.github.commoble.expandedmultiverse.common.world;
 
 import java.util.Random;
 
-import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
+import com.github.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
 
 import net.minecraft.client.audio.MusicTicker.MusicType;
 import net.minecraft.entity.Entity;

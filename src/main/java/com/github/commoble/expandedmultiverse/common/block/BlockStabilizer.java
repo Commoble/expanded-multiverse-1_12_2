@@ -1,8 +1,8 @@
-package com.commoble.expandedmultiverse.common.block;
+package com.github.commoble.expandedmultiverse.common.block;
 
-import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
-import com.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
+import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

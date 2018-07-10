@@ -1,8 +1,8 @@
-package com.commoble.expandedmultiverse.client;
+package com.github.commoble.expandedmultiverse.client;
 
-import com.commoble.expandedmultiverse.client.render.tesr.TESRWormholeCore;
-import com.commoble.expandedmultiverse.common.CommonProxy;
-import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
+import com.github.commoble.expandedmultiverse.client.render.tesr.TESRWormholeCore;
+import com.github.commoble.expandedmultiverse.common.CommonProxy;
+import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;

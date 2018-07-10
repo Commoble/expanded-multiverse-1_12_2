@@ -1,14 +1,15 @@
-package com.commoble.expandedmultiverse.common.block;
+package com.github.commoble.expandedmultiverse.common.block;
 
 import javax.annotation.Nullable;
 
-import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
-import com.commoble.expandedmultiverse.common.item.ItemLedger;
-import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
-import com.commoble.expandedmultiverse.common.multiverse.PerpendicularTeleporter;
-import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
+import com.github.commoble.expandedmultiverse.common.ConfigMultiverse;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
+import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
+import com.github.commoble.expandedmultiverse.common.multiverse.PerpendicularTeleporter;
+import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -81,7 +82,7 @@ public class BlockWormholeCore extends BlockContainer
     	// if this is the main world, go to another world
     	if (world.provider.getDimension() == 0)
     	{
-    		int index = (Math.abs(pos.hashCode())) % DimensionLedger.MAX_DIMS;//ConfigMultiverse.perpendicular_universe_count;
+    		int index = (Math.abs(pos.hashCode())) % ConfigMultiverse.perpendicular_universe_count;//ConfigMultiverse.perpendicular_universe_count;
     		return DimensionLedger.getPerpendicularUniverseID(index);
     	}
     	else	// if this is ANY OTHER WORLD, go back to the main world

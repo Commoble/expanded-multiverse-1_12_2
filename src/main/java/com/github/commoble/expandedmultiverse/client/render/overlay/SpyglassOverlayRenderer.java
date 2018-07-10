@@ -1,9 +1,9 @@
-package com.commoble.expandedmultiverse.client.render.overlay;
+package com.github.commoble.expandedmultiverse.client.render.overlay;
 
 import org.lwjgl.opengl.GL11;
 
-import com.commoble.expandedmultiverse.client.render.RenderBuddy;
-import com.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
+import com.github.commoble.expandedmultiverse.client.render.RenderBuddy;
+import com.github.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

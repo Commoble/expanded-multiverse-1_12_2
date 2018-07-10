@@ -1,9 +1,9 @@
-package com.commoble.expandedmultiverse.client.render.tesr;
+package com.github.commoble.expandedmultiverse.client.render.tesr;
 
-import com.commoble.expandedmultiverse.client.model.ModelWormholeCore;
-import com.commoble.expandedmultiverse.common.item.ItemLedger;
-import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
-import com.commoble.expandedmultiverse.common.util.MathBuddy;
+import com.github.commoble.expandedmultiverse.client.model.ModelWormholeCore;
+import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
+import com.github.commoble.expandedmultiverse.common.util.MathBuddy;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

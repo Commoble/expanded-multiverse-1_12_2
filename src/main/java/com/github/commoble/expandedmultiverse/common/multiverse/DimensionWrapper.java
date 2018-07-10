@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.multiverse;
+package com.github.commoble.expandedmultiverse.common.multiverse;
 
 import net.minecraft.world.DimensionType;
 

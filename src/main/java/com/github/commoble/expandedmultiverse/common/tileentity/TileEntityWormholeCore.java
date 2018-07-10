@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.tileentity;
+package com.github.commoble.expandedmultiverse.common.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;

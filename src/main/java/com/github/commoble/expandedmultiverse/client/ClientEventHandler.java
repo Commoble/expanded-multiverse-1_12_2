@@ -1,6 +1,6 @@
-package com.commoble.expandedmultiverse.client;
+package com.github.commoble.expandedmultiverse.client;
 
-import com.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;

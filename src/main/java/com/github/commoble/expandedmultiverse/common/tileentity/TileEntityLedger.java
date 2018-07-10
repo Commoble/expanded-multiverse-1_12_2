@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.tileentity;
+package com.github.commoble.expandedmultiverse.common.tileentity;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

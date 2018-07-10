@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.item;
+package com.github.commoble.expandedmultiverse.common.item;
 
 import net.minecraft.item.Item;
 

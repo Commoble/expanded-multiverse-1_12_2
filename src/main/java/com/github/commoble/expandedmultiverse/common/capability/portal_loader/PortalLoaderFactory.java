@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.capability.portal_loader;
+package com.github.commoble.expandedmultiverse.common.capability.portal_loader;
 
 import java.util.concurrent.Callable;
 

@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common;
+package com.github.commoble.expandedmultiverse.common;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;

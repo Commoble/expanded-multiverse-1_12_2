@@ -1,13 +1,13 @@
-package com.commoble.expandedmultiverse.client.render;
+package com.github.commoble.expandedmultiverse.client.render;
 
 import java.util.LinkedList;
 import java.util.Random;
 
-import com.commoble.expandedmultiverse.client.render.overlay.SpyglassOverlayRenderer;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
-import com.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.client.render.overlay.SpyglassOverlayRenderer;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
+import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.util;
+package com.github.commoble.expandedmultiverse.common.util;
 
 public class MathBuddy
 {

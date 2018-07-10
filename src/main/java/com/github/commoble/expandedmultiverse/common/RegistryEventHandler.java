@@ -1,8 +1,8 @@
-package com.commoble.expandedmultiverse.common;
+package com.github.commoble.expandedmultiverse.common;
 
-import com.commoble.expandedmultiverse.common.block.BlockLedger;
-import com.commoble.expandedmultiverse.common.item.ItemLedger;
-import com.commoble.expandedmultiverse.common.sound.SoundLedger;
+import com.github.commoble.expandedmultiverse.common.block.BlockLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.sound.SoundLedger;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

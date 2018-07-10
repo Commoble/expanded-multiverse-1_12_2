@@ -1,12 +1,12 @@
-package com.commoble.expandedmultiverse.common;
+package com.github.commoble.expandedmultiverse.common;
 
-import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderFactory;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderStorage;
-import com.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
-import com.commoble.expandedmultiverse.common.multiverse.MultiverseSavedData;
-import com.commoble.expandedmultiverse.common.tileentity.TileEntityLedger;
-import com.commoble.expandedmultiverse.common.world.WorldGenManager;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderFactory;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderStorage;
+import com.github.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
+import com.github.commoble.expandedmultiverse.common.multiverse.MultiverseSavedData;
+import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityLedger;
+import com.github.commoble.expandedmultiverse.common.world.WorldGenManager;
 
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.CapabilityManager;

@@ -1,7 +1,7 @@
-package com.commoble.expandedmultiverse.common.item;
+package com.github.commoble.expandedmultiverse.common.item;
 
-import com.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
-import com.commoble.expandedmultiverse.common.block.BlockLedger;
+import com.github.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
+import com.github.commoble.expandedmultiverse.common.block.BlockLedger;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;

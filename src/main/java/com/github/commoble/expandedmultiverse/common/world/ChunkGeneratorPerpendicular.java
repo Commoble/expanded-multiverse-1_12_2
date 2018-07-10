@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.world;
+package com.github.commoble.expandedmultiverse.common.world;
 
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGeneratorOverworld;

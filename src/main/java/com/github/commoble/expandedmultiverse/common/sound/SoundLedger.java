@@ -1,6 +1,6 @@
-package com.commoble.expandedmultiverse.common.sound;
+package com.github.commoble.expandedmultiverse.common.sound;
 
-import com.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
+import com.github.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

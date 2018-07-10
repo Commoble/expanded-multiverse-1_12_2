@@ -1,7 +1,7 @@
-package com.commoble.expandedmultiverse.common.capability;
+package com.github.commoble.expandedmultiverse.common.capability;
 
-import com.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
+import com.github.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

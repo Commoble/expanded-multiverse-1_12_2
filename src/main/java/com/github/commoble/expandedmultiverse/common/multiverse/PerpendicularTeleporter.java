@@ -1,12 +1,12 @@
-package com.commoble.expandedmultiverse.common.multiverse;
+package com.github.commoble.expandedmultiverse.common.multiverse;
 
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import com.commoble.expandedmultiverse.common.block.BlockLedger;
-import com.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
-import com.commoble.expandedmultiverse.common.world.WorldHelper;
+import com.github.commoble.expandedmultiverse.common.block.BlockLedger;
+import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
+import com.github.commoble.expandedmultiverse.common.world.WorldHelper;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;

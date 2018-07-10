@@ -1,6 +1,6 @@
-package com.commoble.expandedmultiverse.common.block;
+package com.github.commoble.expandedmultiverse.common.block;
 
-import com.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
+import com.github.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;

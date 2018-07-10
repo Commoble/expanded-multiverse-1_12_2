@@ -1,10 +1,10 @@
-package com.commoble.expandedmultiverse.common.multiverse;
+package com.github.commoble.expandedmultiverse.common.multiverse;
 
 import java.util.HashMap;
 
-import com.commoble.expandedmultiverse.common.ConfigMultiverse;
-import com.commoble.expandedmultiverse.common.world.WorldGenManager;
-import com.commoble.expandedmultiverse.common.world.WorldProviderPerpendicular;
+import com.github.commoble.expandedmultiverse.common.ConfigMultiverse;
+import com.github.commoble.expandedmultiverse.common.world.WorldGenManager;
+import com.github.commoble.expandedmultiverse.common.world.WorldProviderPerpendicular;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;

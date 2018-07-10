@@ -1,6 +1,6 @@
-package com.commoble.expandedmultiverse.server;
+package com.github.commoble.expandedmultiverse.server;
 
-import com.commoble.expandedmultiverse.common.CommonProxy;
+import com.github.commoble.expandedmultiverse.common.CommonProxy;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

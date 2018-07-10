@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common;
+package com.github.commoble.expandedmultiverse.common;
 
 import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.common.Mod;
@@ -20,8 +20,8 @@ public class ExpandedMultiverseMod
     public static final String VERSION = "1.0.0.0";
     public static final String NAME="Expanded Multiverse";
     
-    @SidedProxy(clientSide="com.commoble.expandedmultiverse.client.CombinedClientProxy",
-    		serverSide = "com.commoble.expandedmultiverse.server.DedicatedServerProxy")
+    @SidedProxy(clientSide="com.github.commoble.expandedmultiverse.client.CombinedClientProxy",
+    		serverSide = "com.github.commoble.expandedmultiverse.server.DedicatedServerProxy")
     public static CommonProxy proxy;
     
     /**

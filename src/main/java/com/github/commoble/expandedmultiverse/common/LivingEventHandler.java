@@ -1,7 +1,7 @@
-package com.commoble.expandedmultiverse.common;
+package com.github.commoble.expandedmultiverse.common;
 
-import com.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
-import com.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
+import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;

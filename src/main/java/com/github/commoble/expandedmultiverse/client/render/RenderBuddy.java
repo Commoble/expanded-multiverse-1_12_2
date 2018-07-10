@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.client.render;
+package com.github.commoble.expandedmultiverse.client.render;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.BufferBuilder;

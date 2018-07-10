@@ -1,4 +1,4 @@
-package com.commoble.expandedmultiverse.common.world;
+package com.github.commoble.expandedmultiverse.common.world;
 
 public enum EnumWorldAspect
 {

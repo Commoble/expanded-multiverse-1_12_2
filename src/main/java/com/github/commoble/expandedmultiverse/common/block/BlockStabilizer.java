@@ -22,6 +22,8 @@ public class BlockStabilizer extends Block
 		super(Material.WOOD);
 		this.setCreativeTab(ItemLedger.emtab);
 		this.setSoundType(SoundType.WOOD);
+		this.setHardness(2.0F);
+		this.setResistance(5.0F);
 	}
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)

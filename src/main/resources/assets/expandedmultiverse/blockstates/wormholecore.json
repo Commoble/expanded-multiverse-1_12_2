@@ -11,7 +11,8 @@
     },
     "variants":
     {
-        "normal": [{}],
+        "lit=false": [{}],
+        "lit=true": [{}],
         "inventory": [{}]
     }
 }

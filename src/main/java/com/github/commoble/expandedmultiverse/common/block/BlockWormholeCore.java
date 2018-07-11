@@ -1,5 +1,7 @@
 package com.github.commoble.expandedmultiverse.common.block;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import com.github.commoble.expandedmultiverse.common.ConfigMultiverse;
@@ -12,10 +14,14 @@ import com.github.commoble.expandedmultiverse.common.multiverse.PerpendicularTel
 import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockLever;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,24 +31,74 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ITeleporter;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockWormholeCore extends BlockContainer
 {
+	public static final PropertyBool LIT = PropertyBool.create("lit");
+	public static final int LIGHT_VALUE = 12;
+	
+	private final IBlockState unlitState;
+	private final IBlockState litState;
+	
 
 	public BlockWormholeCore()
 	{
 		super(Material.PORTAL);
 		this.setCreativeTab(ItemLedger.emtab);
 		this.setSoundType(SoundType.GLASS);
-		this.lightValue = 15;
 		this.setBlockUnbreakable();
+        this.setTickRandomly(true);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LIT, Boolean.valueOf(false)));
+		this.unlitState = this.getDefaultState();
+		this.litState = this.unlitState.cycleProperty(LIT);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public IBlockState getLitState()
+	{
+		return this.litState;
+	}
+	
+	/**
+     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
+     * IBlockstate
+     */
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.unlitState;
+    }
+
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     * 0x0 = unlit, 0x1 = lit
+     */
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(LIT, Boolean.valueOf((meta & 1) > 0));
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     * 0x0 = unlit, 0x1 = lit
+     */
+    public int getMetaFromState(IBlockState state)
+    {
+        return (state.getValue(LIT).booleanValue()) ? 1 : 0;
+    }
+
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, new IProperty[] {LIT});
+    }
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
@@ -50,6 +106,27 @@ public class BlockWormholeCore extends BlockContainer
 		// TODO Auto-generated method stub
 		return new TileEntityWormholeCore();
 	}
+
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+    	if (state.getValue(LIT).booleanValue())
+    	{
+    		TileEntity te = worldIn.getTileEntity(pos);
+    		if (!this.isWormholeActive(worldIn, pos))
+    		{
+    			worldIn.setBlockState(pos, this.unlitState);
+    		}
+    	}
+    }
+    
+    /**
+     * Returns true if a wormhole TE is active at a given blockpos
+     */
+    public boolean isWormholeActive(World world, BlockPos pos)
+    {
+    	TileEntity te = world.getTileEntity(pos);
+    	return (te != null && te instanceof TileEntityWormholeCore && ((TileEntityWormholeCore)te).getIsActive());
+    }
 
     /**
      * Called when the block is right clicked by a player.
@@ -103,6 +180,61 @@ public class BlockWormholeCore extends BlockContainer
     	{
     		((TileEntityWormholeCore)te).activateWormhole();
     	}
+    }
+
+    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
+    {
+    	this.disturb(worldIn, pos);
+    }
+
+    /**
+     * Called when the block is right clicked by a player.
+     */
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+    	this.disturb(worldIn, pos);
+        return true;
+    }
+    
+    /**
+     * Sets the wormhole blockstate to lit and makes some particles
+     * @param world
+     * @param pos
+     */
+    public void disturb(World world, BlockPos pos)
+    {
+    	boolean active = this.isWormholeActive(world, pos);
+    	world.setBlockState(pos, this.litState);
+    	if (active)
+    	{
+        	TileEntity te = world.getTileEntity(pos);
+        	((TileEntityWormholeCore)te).activateWormhole();
+    	}
+    	this.spawnParticles(world, pos);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    {
+        if (stateIn.getValue(LIT).booleanValue())
+        {
+            this.spawnParticles(worldIn, pos);
+        }
+    }
+    
+    public void spawnParticles(World world, BlockPos pos)
+    {
+        Random random = world.rand;
+
+        for (int i = 0; i < 1; ++i)
+        {
+            double d1 = (double)((float)pos.getX() + random.nextFloat());
+            double d2 = (double)((float)pos.getY() + random.nextFloat());
+            double d3 = (double)((float)pos.getZ() + random.nextFloat());
+
+
+            world.spawnParticle(EnumParticleTypes.END_ROD, d1, d2, d3, 0.0D, 0.0D, 0.0D);
+        }
     }
 
     /**
@@ -209,5 +341,22 @@ public class BlockWormholeCore extends BlockContainer
     public boolean isFullCube(IBlockState state)
     {
     	return false;
+    }
+
+    /**
+     * Get a light value for this block, taking into account the given state and coordinates, normal ranges are between 0 and 15
+     *
+     * @return LIGHT_VALUE if blockstate is lit, 0 if not
+     */
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+    {
+        if (state.getValue(LIT).booleanValue())
+        {
+        	return BlockWormholeCore.LIGHT_VALUE;
+        }
+        else
+        {
+        	return 0;
+        }
     }
 }

@@ -30,20 +30,20 @@ public class TESRWormholeCore extends TileEntitySpecialRenderer<TileEntityWormho
 		
 //		IBlockState iblockstate = Blocks.GOLD_BLOCK.getDefaultState();
         
-		if (te.getIsActive() || (player != null && player.getHeldItemMainhand().getItem() == ItemLedger.spyglassItem))
-		{	// if inactive, player must be holding a spyglass to see this
-			GlStateManager.pushMatrix();
-			GlStateManager.translate((float)x,  (float)y,  (float)z);
-			
-			float ticks = te.getWorld().getWorldTime() + partialTicks;
-			this.bindTexture(this.TEXTURE_WORMHOLE);
-			float angle = (ticks * ROTATIONS_PER_SECOND * MathBuddy.RADS_PER_TICK) % MathBuddy.TWOPI;
-			
-			GlStateManager.enableCull();
-			model.render(angle);
-			//GlStateManager.disableCull();
-			GlStateManager.popMatrix();
-		}
+//		if (te.getIsActive() || (player != null && player.getHeldItemMainhand().getItem() == ItemLedger.spyglassItem))
+//		{	// if inactive, player must be holding a spyglass to see this
+//			GlStateManager.pushMatrix();
+//			GlStateManager.translate((float)x,  (float)y,  (float)z);
+//			
+//			float ticks = te.getWorld().getWorldTime() + partialTicks;
+//			this.bindTexture(this.TEXTURE_WORMHOLE);
+//			float angle = (ticks * ROTATIONS_PER_SECOND * MathBuddy.RADS_PER_TICK) % MathBuddy.TWOPI;
+//			
+//			GlStateManager.enableCull();
+//			model.render(angle);
+//			//GlStateManager.disableCull();
+//			GlStateManager.popMatrix();
+//		}
 
 
 //		else if (iblockstate != null)

@@ -4,19 +4,15 @@ import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IP
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderFactory;
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderStorage;
 import com.github.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
-import com.github.commoble.expandedmultiverse.common.multiverse.MultiverseSavedData;
 import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityLedger;
 import com.github.commoble.expandedmultiverse.common.world.WorldGenManager;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy
@@ -67,8 +63,11 @@ public class CommonProxy
 	{
 		
 	}
-
-	public void serverStarted(FMLServerStartedEvent event)
+	
+	// empty particle methods
+	
+	public void spawnWormholeCoreParticles(World world, BlockPos pos)
 	{
+		// NOP, do stuff in client proxy
 	}
 }

@@ -52,12 +52,6 @@ public class ExpandedMultiverseMod
     	proxy.postInit(event);
     }
     
-    @EventHandler
-    public void serverStarted(FMLServerStartedEvent event)
-    {
-    	proxy.serverStarted(event);
-    }
-    
     /**
      * Generates a string with the mod prefix from a base string to get the full string ID
      * e.g. "models/banana" -> "expandedmultiverse:models/banana"

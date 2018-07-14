@@ -1,13 +1,16 @@
 package com.github.commoble.expandedmultiverse.common.tileentity;
 
+import com.github.commoble.expandedmultiverse.common.ExpandedMultiverseMod;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityWormholeCore extends TileEntity
+public class TileEntityWormholeCore extends TileEntity implements ITickable
 {
 
 	private boolean isActive;	// if true, wormhole is visible and acts as a portal when stood in
@@ -63,6 +66,15 @@ public class TileEntityWormholeCore extends TileEntity
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		this.readFromNBT(packet.getNbtCompound());
+	}
+
+	@Override
+	public void update()
+	{
+		if (this.isActive)
+		{
+			ExpandedMultiverseMod.proxy.spawnWormholeCoreParticles(this.world, this.pos);
+		}
 	}
 	
 	

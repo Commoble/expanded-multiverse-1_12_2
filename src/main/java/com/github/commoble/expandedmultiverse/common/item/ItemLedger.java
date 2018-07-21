@@ -40,8 +40,8 @@ public class ItemLedger
 	{
 		IForgeRegistry<Item> registry = event.getRegistry();
 		
-		wormholeCoreItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockWormholeCore), BlockLedger.wormholeCore_name);
-		stabilizerItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockStabilizer), BlockLedger.stabilizer_name);
+		wormholeCoreItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockWormholeCore), BlockLedger.WORMHOLE_CORE_NAME);
+		stabilizerItemBlock = registerItemBlock(registry, new ItemBlock(BlockLedger.blockStabilizer), BlockLedger.STABILIZER_NAME);
 		//grinderItemBlock = registerItemBlock(event.getRegistry(), new ItemBlock(BlockLedger.grinderBlock), "grinder");
 		//grinderItemBlock.setCreativeTab(trtab);
 		spyglassItem = registerItem(registry, new ItemSpyglass(), ItemLedger.spyglass_name);

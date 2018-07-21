@@ -12,8 +12,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class BlockLedger
 {	
 	// name strings
-	public static final String wormholeCore_name = "wormholecore";
-	public static final String stabilizer_name = "stabilizer";
+	public static final String WORMHOLE_CORE_NAME = "wormholecore";
+	public static final String STABILIZER_NAME = "stabilizer";
 	
 	// block fields
 	public static BlockWormholeCore blockWormholeCore;
@@ -24,8 +24,8 @@ public class BlockLedger
 	{
 		IForgeRegistry<Block> registry = event.getRegistry();
 		//grinderBlock = (BlockGrinder)registerBlock(event.getRegistry(), new BlockGrinder(), "grinder");
-		BlockLedger.blockWormholeCore = registerBlock(registry, new BlockWormholeCore(), wormholeCore_name);
-		BlockLedger.blockStabilizer = registerBlock(registry, new BlockStabilizer(), stabilizer_name);
+		BlockLedger.blockWormholeCore = registerBlock(registry, new BlockWormholeCore(), WORMHOLE_CORE_NAME);
+		BlockLedger.blockStabilizer = registerBlock(registry, new BlockStabilizer(), STABILIZER_NAME);
 	}
 	
 	private static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T newBlock, String name)

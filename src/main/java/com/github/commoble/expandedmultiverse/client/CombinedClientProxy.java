@@ -50,9 +50,9 @@ public class CombinedClientProxy extends CommonProxy
 	@Override
 	public void spawnWormholeCoreParticles(World world, BlockPos pos)
 	{
-		double x = pos.getX() + 0.25D + (world.rand.nextFloat()*0.1F - 0.05F);
+		double x = pos.getX() + 0.25D + (world.rand.nextFloat()*0.5F);
 		double y = pos.getY() + 0.75D + (world.rand.nextFloat()*0.1F - 0.05F);
-		double z = pos.getZ() + 0.75D + (world.rand.nextFloat()*0.1F - 0.05F);
+		double z = pos.getZ() + 0.25D + (world.rand.nextFloat()*0.5F);
 		ParticleWormholeCore part = new ParticleWormholeCore(world, x, y, z);
 		Minecraft.getMinecraft().effectRenderer.addEffect(part);
 	}

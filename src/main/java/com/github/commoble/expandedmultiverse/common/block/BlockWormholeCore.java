@@ -8,13 +8,12 @@ import com.github.commoble.expandedmultiverse.common.ConfigMultiverse;
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
-import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemTabs;
 import com.github.commoble.expandedmultiverse.common.multiverse.DimensionLedger;
 import com.github.commoble.expandedmultiverse.common.multiverse.PerpendicularTeleporter;
 import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockLever;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -26,7 +25,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -53,7 +51,7 @@ public class BlockWormholeCore extends BlockContainer
 	public BlockWormholeCore()
 	{
 		super(Material.PORTAL);
-		this.setCreativeTab(ItemLedger.emtab);
+		this.setCreativeTab(ItemTabs.emtab);
 		this.setSoundType(SoundType.GLASS);
 		this.setBlockUnbreakable();
         this.setTickRandomly(true);

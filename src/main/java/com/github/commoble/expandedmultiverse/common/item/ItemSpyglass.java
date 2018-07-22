@@ -7,7 +7,7 @@ public class ItemSpyglass extends Item
 	public ItemSpyglass()
 	{
 		this.setFull3D();
-		this.setCreativeTab(ItemLedger.emtab);
+		this.setCreativeTab(ItemTabs.emtab);
 		this.setMaxStackSize(1);
 	}
 }

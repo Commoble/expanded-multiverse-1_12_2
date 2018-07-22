@@ -1,6 +1,6 @@
 package com.github.commoble.expandedmultiverse.client;
 
-import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemRegistrar;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -17,20 +17,15 @@ public class ClientEventHandler
 	public static void onModelRegister(ModelRegistryEvent e)
 	{
 		// regular items
-		registerItemRenderer(ItemLedger.spyglassItem);
+		registerItemRenderer(ItemRegistrar.spyglass);
 		
 		// itemblocks
-		registerItemblockRenderer(ItemLedger.wormholeCoreItemBlock);
-		registerItemblockRenderer(ItemLedger.stabilizerItemBlock);
+		registerItemRenderer(ItemRegistrar.wormhole_core);
+		registerItemRenderer(ItemRegistrar.stabilizer);
 	}
 	
 	private static void registerItemRenderer(Item item)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
-	
-	private static void registerItemblockRenderer(ItemBlock iblock)
-	{
-		ModelLoader.setCustomModelResourceLocation(iblock, 0, new ModelResourceLocation(iblock.getBlock().getRegistryName(), "inventory"));
 	}
 }

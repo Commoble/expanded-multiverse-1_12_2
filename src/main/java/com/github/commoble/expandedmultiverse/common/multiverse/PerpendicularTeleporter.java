@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import com.github.commoble.expandedmultiverse.common.block.BlockLedger;
+import com.github.commoble.expandedmultiverse.common.block.BlockRegistrar;
 import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 import com.github.commoble.expandedmultiverse.common.world.WorldHelper;
 
@@ -82,7 +82,7 @@ public class PerpendicularTeleporter implements ITeleporter
     	
     	// set the center point to wormhole and the point below that to air, overwriting any block
     	BlockPos pos = new BlockPos(xBase, yBase, zBase);
-    	nextWorld.setBlockState(pos, BlockLedger.blockWormholeCore.getDefaultState());
+    	nextWorld.setBlockState(pos, BlockRegistrar.wormhole_core.getDefaultState());
     	TileEntity te = nextWorld.getTileEntity(pos);
     	if (te instanceof TileEntityWormholeCore)
     	{
@@ -144,7 +144,7 @@ public class PerpendicularTeleporter implements ITeleporter
     {
 
     	
-    	if (nextWorld.getBlockState(this.basePos).getBlock() == BlockLedger.blockWormholeCore)
+    	if (nextWorld.getBlockState(this.basePos).getBlock() == BlockRegistrar.wormhole_core)
     	{
     		return this.basePos;
     	}

@@ -1,8 +1,6 @@
 package com.github.commoble.expandedmultiverse.common.block;
 
-import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
-import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
-import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemTabs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,7 +18,7 @@ public class BlockStabilizer extends Block
 	public BlockStabilizer()
 	{
 		super(Material.WOOD);
-		this.setCreativeTab(ItemLedger.emtab);
+		this.setCreativeTab(ItemTabs.emtab);
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(2.0F);
 		this.setResistance(5.0F);
@@ -29,7 +27,7 @@ public class BlockStabilizer extends Block
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		// if there's a wormhole correctly positioned above this block, attempt to activate it
-		if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR && world.getBlockState(pos.up(2)).getBlock() == BlockLedger.blockWormholeCore)
+		if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR && world.getBlockState(pos.up(2)).getBlock() == BlockRegistrar.wormhole_core)
 		{
 			BlockWormholeCore.activateWormhole(world, pos.up(2));
 		}

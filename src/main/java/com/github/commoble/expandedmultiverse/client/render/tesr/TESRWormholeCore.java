@@ -1,7 +1,7 @@
 package com.github.commoble.expandedmultiverse.client.render.tesr;
 
 import com.github.commoble.expandedmultiverse.client.model.ModelWormholeCore;
-import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemRegistrar;
 import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 import com.github.commoble.expandedmultiverse.common.util.MathBuddy;
 
@@ -30,7 +30,7 @@ public class TESRWormholeCore extends TileEntitySpecialRenderer<TileEntityWormho
 		
 //		IBlockState iblockstate = Blocks.GOLD_BLOCK.getDefaultState();
         
-//		if (te.getIsActive() || (player != null && player.getHeldItemMainhand().getItem() == ItemLedger.spyglassItem))
+//		if (te.getIsActive() || (player != null && player.getHeldItemMainhand().getItem() == ItemRegistrar.spyglassItem))
 //		{	// if inactive, player must be holding a spyglass to see this
 //			GlStateManager.pushMatrix();
 //			GlStateManager.translate((float)x,  (float)y,  (float)z);

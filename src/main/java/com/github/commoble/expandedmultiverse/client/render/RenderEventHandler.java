@@ -7,7 +7,7 @@ import com.github.commoble.expandedmultiverse.client.render.overlay.SpyglassOver
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.IPortalLoaderCapability;
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderCapability;
 import com.github.commoble.expandedmultiverse.common.capability.portal_loader.PortalLoaderProvider;
-import com.github.commoble.expandedmultiverse.common.item.ItemLedger;
+import com.github.commoble.expandedmultiverse.common.item.ItemRegistrar;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -34,7 +34,7 @@ public class RenderEventHandler
 		
 		if (e.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE)
 		{
-			if (player.getHeldItemMainhand().getItem() == ItemLedger.spyglassItem)
+			if (player.getHeldItemMainhand().getItem() == ItemRegistrar.spyglass)
 			{
 				SpyglassOverlayRenderer.render(mc, e.getResolution().getScaledWidth(), e.getResolution().getScaledHeight());
 			}

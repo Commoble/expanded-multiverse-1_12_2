@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 
 public class ParticleWormholeCore extends Particle
 {	
-	public static final float SCALE_ACCELERATION = -0.2F;	// rate at which shrinking rate accelerates (per tick)
+	public static final float SCALE_ACCELERATION = -0.5F;	// rate at which shrinking rate accelerates (per tick)
 	
 	public float current_scale_vel;
 	
@@ -18,10 +18,10 @@ public class ParticleWormholeCore extends Particle
         this.motionX = 0;
         this.motionY = 0;
         this.motionZ = 0;
-        this.particleMaxAge = 10 + this.rand.nextInt(10);	// 10 to 20
+        this.particleMaxAge = 5 + this.rand.nextInt(5);	// 10 to 20
         this.setAlphaF(1F);
         this.particleScale = 5F + this.rand.nextFloat()*10F;	// 5 to 15F
-        this.current_scale_vel = this.rand.nextFloat();	// 0 to 1F
+        this.current_scale_vel = 1F - this.rand.nextFloat() * 2F;	// 0 to 1F
         float brightness = 0.9F + world.rand.nextFloat()*0.1F;
         this.setRBGColorF(brightness, brightness, brightness);
 	}

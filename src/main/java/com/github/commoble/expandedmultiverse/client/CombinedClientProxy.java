@@ -1,11 +1,13 @@
 package com.github.commoble.expandedmultiverse.client;
 
 import com.github.commoble.expandedmultiverse.client.particle.ParticleWormholeCore;
+import com.github.commoble.expandedmultiverse.client.particle.ParticleWormholeSwirlyBit;
 import com.github.commoble.expandedmultiverse.client.render.tesr.TESRWormholeCore;
 import com.github.commoble.expandedmultiverse.common.CommonProxy;
 import com.github.commoble.expandedmultiverse.common.tileentity.TileEntityWormholeCore;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -50,10 +52,21 @@ public class CombinedClientProxy extends CommonProxy
 	@Override
 	public void spawnWormholeCoreParticles(World world, BlockPos pos)
 	{
-		double x = pos.getX() + 0.25D + (world.rand.nextFloat()*0.5F);
-		double y = pos.getY() + 0.75D + (world.rand.nextFloat()*0.1F - 0.05F);
-		double z = pos.getZ() + 0.25D + (world.rand.nextFloat()*0.5F);
+		double xbase = pos.getX();
+		double ybase = pos.getY();
+		double zbase = pos.getZ();
+		double x = xbase + 0.25D + (world.rand.nextDouble()*0.5D);
+		double y = ybase + 0.75D + (world.rand.nextDouble()*0.1D - 0.05D);
+		double z = zbase + 0.25D + (world.rand.nextDouble()*0.5D);
 		ParticleWormholeCore part = new ParticleWormholeCore(world, x, y, z);
-		Minecraft.getMinecraft().effectRenderer.addEffect(part);
+		ParticleManager particleManager = Minecraft.getMinecraft().effectRenderer;
+		particleManager.addEffect(part);
+		x = xbase - 1.5D + (world.rand.nextDouble()*4D); // = 0.5 + ([0,4) - 2), diameter 4, radius 2, centered on x+0.5F
+		y = ybase - 1.5D + (world.rand.nextDouble()*4D);
+		z = zbase - 1.5D + (world.rand.nextDouble()*4D);
+		ParticleWormholeSwirlyBit swirlypart = new ParticleWormholeSwirlyBit(
+				world, x, y, z,
+				xbase+0.5, ybase+0.5, zbase+0.5);
+		particleManager.addEffect(swirlypart);
 	}
 }

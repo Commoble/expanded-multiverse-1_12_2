@@ -1,19 +1,17 @@
 package com.github.commoble.expandedmultiverse.common.multiverse;
 
-import java.util.HashMap;
-
 import com.github.commoble.expandedmultiverse.common.ConfigMultiverse;
-import com.github.commoble.expandedmultiverse.common.world.WorldGenManager;
 import com.github.commoble.expandedmultiverse.common.world.WorldProviderPerpendicular;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.crash.ICrashReportDetail;
+import net.minecraft.item.Item;
+import net.minecraft.util.ReportedException;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 // class for holding dimension-related stuff
 public class DimensionLedger
@@ -28,14 +26,18 @@ public class DimensionLedger
 		// this will check for the data glob on the global world file
 		// and initialize the data if it doesn't exist
 		// this will permanently set the data on newly created worlds
-		int max_dims = ConfigMultiverse.perpendicular_universe_count;
-		int first_id = ConfigMultiverse.perpendicular_universe_first_ID;
-		DimensionLedger.indexedPerpendicularIDs = new int[max_dims];
+		int max_natural_dims = ConfigMultiverse.natural_universe_count;
+		int first_id = ConfigMultiverse.natural_universe_first_ID;
+		int max_total_dims = ConfigMultiverse.total_universe_count;
+		
+		assert max_total_dims >= max_natural_dims : "Total universe count cannot be lower than natural universe count, fix your settings";
+		
+		DimensionLedger.indexedPerpendicularIDs = new int[max_natural_dims];
 		System.out.println("Registering Expanded Multiverse Dimensions");
 		//DimensionLedger.dim_wrappers = new DimensionWrapper[max_dims];
 		DimensionLedger.perpendicularDimensionType = DimensionType.register("perpendicular", "_perpendicular", 7, WorldProviderPerpendicular.class, false);
 		// register this many worlds
-		for (int i=0; i<max_dims; i++)
+		for (int i=0; i<max_total_dims; i++)
 		{
 			int id = first_id + i;
 			DimensionManager.registerDimension(id, perpendicularDimensionType);

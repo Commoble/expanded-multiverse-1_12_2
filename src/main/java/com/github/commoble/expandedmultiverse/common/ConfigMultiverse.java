@@ -26,11 +26,15 @@ public class ConfigMultiverse
 	// TODO consider letting min be 0 and handle appropriately
 	@RangeInt(min=1, max=1000)
 	@RequiresMcRestart
-	@Comment("The number of different worlds that can be accessed via natural wormholes. Changing this will break existing worlds.")
-	public static int perpendicular_universe_count = 97; // largish prime number
+	@Comment("The number of different worlds that can be accessed via natural wormholes. Client and server must have the same config value. Changing this will break existing worlds.")
+	public static int natural_universe_count = 19; // largish prime number
 
 	@RequiresMcRestart
-	@Comment("The first ID for perpendicular universe dimensions. The IDs used will form a continuous block of the size of perpendicular_universe_count. Changing this will break existing worlds.")
-	public static int perpendicular_universe_first_ID = 7171117;
+	@Comment("The first ID for natural universe dimensions. The IDs used will form a continuous block. Client and server must have the same config value. Changing this will break existing worlds.")
+	public static int natural_universe_first_ID = 7171117;
 	
+	@RangeInt(min=1, max=1000)
+	@RequiresMcRestart
+	@Comment("The total number of different worlds that can be accessed from natural or tuned wormholes. Client and server must have the same config value. Changing this will break existing worlds. Should not be lower than the natural universe count.")
+	public static int total_universe_count = 100;
 }

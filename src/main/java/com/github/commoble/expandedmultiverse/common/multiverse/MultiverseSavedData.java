@@ -18,7 +18,7 @@ public class MultiverseSavedData extends WorldSavedData
 	// name of this WorldSavedData in the global save file
 	private static final String DATA_NAME = ExpandedMultiverseMod.MODID + "_data";
 	//private static final String PERP_UNIVERSE_COUNT_STRING = ExpandedMultiverseMod.MODID + "_perpendicular_universe_count";
-	//private int perpendicular_universe_count;
+	//private int natural_universe_count;
 	
 	public MultiverseSavedData()
 	{
@@ -53,7 +53,7 @@ public class MultiverseSavedData extends WorldSavedData
 //		if (instance == null)	// nothing in the data yet
 //		{
 //			instance = new MultiverseSavedData();
-//			instance.perpendicular_universe_count = DimensionLedger.MAX_DIMS;//ConfigMultiverse.perpendicular_universe_count;
+//			instance.perpendicular_universe_count = DimensionLedger.MAX_DIMS;//ConfigMultiverse.natural_universe_count;
 //			storage.setData(DATA_NAME, instance);
 //		}
 		

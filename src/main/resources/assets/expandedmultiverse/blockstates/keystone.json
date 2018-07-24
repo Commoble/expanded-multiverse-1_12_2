@@ -1,0 +1,19 @@
+{
+    "forge_marker": 1,
+    "defaults":
+    {
+        "textures":
+        {
+            "top": "expandedmultiverse:blocks/keystone_top",
+            "side": "blocks/obsidian",
+            "bottom": "expandedmultiverse:blocks/keystone_bottom"
+        },
+        "model": "cube_bottom_top",
+        "uvlock": true
+    },
+    "variants":
+    {
+        "normal": [{}],
+        "inventory": [{}]
+    }
+}

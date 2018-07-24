@@ -1,0 +1,17 @@
+{
+    "result": {"item": "expandedmultiverse:keystone"},
+    "pattern":
+    [
+        "rEr",
+        "wSw",
+        "wSw"  
+    ],
+    "type": "forge:ore_shaped",
+    "key":
+    {
+        "r": {"item": "minecraft:redstone"},
+        "E": {"item": "minecraft:ender_eye"},
+        "w": {"item": "minecraft:obsidian"},
+        "S": {"item": "minecraft:diamond_block"}
+    }
+}

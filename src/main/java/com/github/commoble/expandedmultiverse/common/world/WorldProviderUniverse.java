@@ -23,7 +23,7 @@ import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class WorldProviderPerpendicular extends WorldProvider
+public class WorldProviderUniverse extends WorldProvider
 {
 	protected long subseed;	// use this seed instead of server seed where possible
 	protected WorldInfo modifiedWorldInfo;	// set of base worldinfo with the seed changed
@@ -100,7 +100,7 @@ public class WorldProviderPerpendicular extends WorldProvider
 	public DimensionType getDimensionType()
 	{
 		// TODO Auto-generated method stub
-		return DimensionLedger.perpendicularDimensionType;//DimensionLedger.getPerpTypeFromID(this.getDimension());
+		return DimensionLedger.standardUniverseDimensionType;
 	}
 
     public IChunkGenerator createChunkGenerator()

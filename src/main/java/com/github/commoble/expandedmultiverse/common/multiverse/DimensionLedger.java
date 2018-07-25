@@ -1,7 +1,7 @@
 package com.github.commoble.expandedmultiverse.common.multiverse;
 
 import com.github.commoble.expandedmultiverse.common.ConfigMultiverse;
-import com.github.commoble.expandedmultiverse.common.world.WorldProviderPerpendicular;
+import com.github.commoble.expandedmultiverse.common.world.WorldProviderUniverse;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -16,10 +16,21 @@ import net.minecraftforge.common.DimensionManager;
 // class for holding dimension-related stuff
 public class DimensionLedger
 {
+	// some definitions:
+	// Universe Prime: the overworld
+	// 
+	// perpendicular universe: a world that intersects Universe Prime along some higher-dimensional axis.
+		// accessed from naturally occurring wormholes
+		// superficially similar to Universe Prime due to the diffusion of matter and energy between universes
+	// parallel universe: a world that does NOT intersect Universe Prime
+		// must be accessed by using a Tesseract Impactor to punch a hole in the Firmament
+		// can be much more unusual
+	
 	//private static DimensionWrapper[] dim_wrappers;
-	private static final Int2ObjectMap<DimensionWrapper> idToWrapperMap = new Int2ObjectOpenHashMap<>();
-	private static int[] indexedPerpendicularIDs;	// zero-indexed array of perpendicular universe IDs
-	public static DimensionType perpendicularDimensionType;
+	//private static final Int2ObjectMap<DimensionWrapper> idToWrapperMap = new Int2ObjectOpenHashMap<>();
+	private static int[] indexedUniverseIDs;	// zero-indexed array of dimension IDs for the perpendicular and parallel universes
+	private static long[] indexedSeeds;	// the seeds for each universe
+	public static DimensionType standardUniverseDimensionType;
 	
 	public static void registerPlanes()
 	{
@@ -32,16 +43,16 @@ public class DimensionLedger
 		
 		assert max_total_dims >= max_natural_dims : "Total universe count cannot be lower than natural universe count, fix your settings";
 		
-		DimensionLedger.indexedPerpendicularIDs = new int[max_natural_dims];
+		DimensionLedger.indexedUniverseIDs = new int[max_natural_dims];
 		System.out.println("Registering Expanded Multiverse Dimensions");
 		//DimensionLedger.dim_wrappers = new DimensionWrapper[max_dims];
-		DimensionLedger.perpendicularDimensionType = DimensionType.register("perpendicular", "_perpendicular", 7, WorldProviderPerpendicular.class, false);
+		DimensionLedger.standardUniverseDimensionType = DimensionType.register("universe", "_universe", 7, WorldProviderUniverse.class, false);
 		// register this many worlds
 		for (int i=0; i<max_total_dims; i++)
 		{
 			int id = first_id + i;
-			DimensionManager.registerDimension(id, perpendicularDimensionType);
-			DimensionLedger.indexedPerpendicularIDs[i] = id;
+			DimensionManager.registerDimension(id, standardUniverseDimensionType);
+			DimensionLedger.indexedUniverseIDs[i] = id;
 		}
 	}
 	
@@ -51,7 +62,7 @@ public class DimensionLedger
 	 */
 	public static int getPerpendicularUniverseID(int index)
 	{
-		return DimensionLedger.indexedPerpendicularIDs[index];
+		return DimensionLedger.indexedUniverseIDs[index];
 	}
 
 	
